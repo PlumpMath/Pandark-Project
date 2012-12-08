@@ -1,9 +1,9 @@
-Pandark - Panda3d GameMaker
-==============================
+Pandark - Panda3d Game Framework
+================================
 
 WORLD EDITOR
 - 3dsMax
-- OgreMax
+- OgreMax (XML scene exporter)
 
 PYTHON
 - Psyco
