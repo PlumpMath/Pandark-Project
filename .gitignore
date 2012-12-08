@@ -7,8 +7,6 @@
 .metadata
 bin/
 tmp/
-*.sublime-project
-*.sublime-workspace
 *.tmp
 *.bak
 *.swp
@@ -29,6 +27,14 @@ local.properties
 
 # PDT-specific
 .buildpath
+
+
+#################
+## Sublime
+#################
+
+*.sublime-project
+*.sublime-workspace
 
 
 #################
