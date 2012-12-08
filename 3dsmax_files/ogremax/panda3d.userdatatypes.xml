@@ -1,0 +1,4 @@
+<userDataTypes>
+	<include file="userdatatypes/entity.userdatatypes.xml" />
+	<include file="userdatatypes/actionarea.userdatatypes.xml" />
+</userDataTypes>

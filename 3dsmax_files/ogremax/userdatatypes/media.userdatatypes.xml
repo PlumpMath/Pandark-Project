@@ -1,0 +1,10 @@
+<userDataTypes>
+	
+	<class name="MediaPack" usage="object">				
+		<data name="animations" displayName="Animations" groupName="Media Pack" type="string" editWidth="300" editHeight="50" />	
+		<data name="textures" displayName="Textures" groupName="Media Pack" type="string" editWidth="300" editHeight="50" />
+		<data name="videos" displayName="Videos" groupName="Media Pack" type="string" editWidth="300" editHeight="50" />		
+		<data name="sounds" displayName="Sounds" groupName="Media Pack" type="string" editWidth="300" editHeight="50" />
+	</class>
+
+</userDataTypes>

@@ -1,0 +1,25 @@
+<userDataTypes>
+	
+	<enum name="Type" type="string">
+		<enumItem name="enabled" value="enabled" />
+		<enumItem name="disabled" value="disabled" />
+		<enumItem name="invisible" value="invisible" />
+	</enum>
+	
+	<enum name="fileType" type="string">
+		<enumItem name="EGG" value=".egg" />
+		<enumItem name="BAM" value=".bam" />
+		<enumItem name="X" value=".x" />
+	</enum>
+	
+	<class name="Entity" usage="object">		
+		<data groupName="Configuration"  name="filename" displayName="Filename" type="string" />
+		<!--<data groupName="File config"  name="fileType" displayName="File Type" type="fileType" defaultValue=".egg" />
+		<data groupName="General settings" name="visible" displayName="Visible" type="bool" defaultValue="True"/>
+		<data groupName="General settings"  name="media" displayName="Media Pack Name" type="string" />
+		<data groupName="Physics settings" name="friction" displayName="Friction" type="float" defaultValue="1.0"/>
+		<data groupName="Physics settings" name="deactivation" displayName="Deactivation" type="bool" defaultValue="True"/>
+		<data name="collisionType" displayName="Collision type" type="Type" defaultValue="enabled"/>-->
+	</class>
+
+</userDataTypes>

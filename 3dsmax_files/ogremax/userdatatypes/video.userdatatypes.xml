@@ -1,0 +1,13 @@
+<userDataTypes>
+
+	<class name="Video" usage="object">
+		<!--<data name="autoplay" displayName="AutoPlay" type="bool" defaultValue="True"/>	
+		<data name="loop" displayName="Loop" type="bool" defaultValue="True"/>-->	
+		<data name="videoFile" displayName="Video File" type="string"/>
+		<data name="soundFile" displayName="Sound File" type="string"/>
+		<data name="materialName" displayName="Material Name" type="string"/>
+		<!--<data name="distance" displayName="Distance to Play" type="float" defaultValue="100.0" maxValue="1000.0"/>
+		<data name="node" displayName="Attach to Node" type="string"/>-->
+	</class>
+
+</userDataTypes>

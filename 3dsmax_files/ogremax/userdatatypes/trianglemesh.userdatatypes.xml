@@ -1,0 +1,23 @@
+<userDataTypes>	
+	<enum name="fileType" type="string">
+		<enumItem name="EGG" value=".egg" />
+		<enumItem name="BAM" value=".bam" />
+		<enumItem name="X" value=".x" />
+	</enum>
+	
+	<class name="Physics-TriangleMesh" usage="object">
+		<data groupName="File config"  name="meshFile" displayName="Mesh File" type="string" />
+		<data groupName="File config"  name="fileType" displayName="File Type" type="fileType" defaultValue=".egg" />
+		<data groupName="General settings"  name="media" displayName="Media Pack Name" type="string" />
+		<data groupName="Physics settings"  name="mass" displayName="Mass" type="float" defaultValue="1.0" maxValue="1000000.0"/>
+		<data groupName="Physics settings"  name="friction" displayName="Friction" type="float" defaultValue="0.5"/>
+		<data groupName="Physics settings"  name="ldamping" displayName="Linear Damping" type="float" defaultValue="0.0" maxValue="1.0"/>
+		<data groupName="Physics settings"  name="adamping" displayName="Angular Damping" type="float" defaultValue="0.0" maxValue="1.0"/>
+		<data groupName="Physics settings"  name="lsleep" displayName="Linear Sleep Threshold" type="float" defaultValue="0.8" maxValue="100.0"/>
+		<data groupName="Physics settings"  name="asleep" displayName="Angular Sleep Threshold" type="float" defaultValue="1.0" maxValue="100.0"/>
+		<data groupName="Physics settings"  name="restitution" displayName="Restitution" type="float" defaultValue="0.0" maxValue="100.0"/>
+		<data groupName="Physics settings" name="deactivation" displayName="Auto-Deactivation" type="bool" defaultValue="True"/>
+		<data groupName="Physics settings" name="kinematic" displayName="Active Kinematic" type="bool" defaultValue="False"/>
+	</class>
+
+</userDataTypes>

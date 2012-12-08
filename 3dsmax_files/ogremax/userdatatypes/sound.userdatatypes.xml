@@ -1,0 +1,10 @@
+<userDataTypes>
+
+	<class name="Sound" usage="object">
+		<data name="autoplay" displayName="AutoPlay" type="bool" defaultValue="True"/>
+		<data name="soundFile" displayName="Sound File" type="string"/>
+		<data name="node" displayName="Attach to Node" type="string"/>
+		<data name="distance" displayName="Distance to Play" type="float" defaultValue="100.0" maxValue="1000.0"/>
+	</class>
+
+</userDataTypes>

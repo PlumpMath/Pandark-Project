@@ -1,0 +1,28 @@
+<userDataTypes>
+	
+	<enum name="physicsType" type="string">
+		<enumItem name="None" value="none" />
+		<enumItem name="Box" value="box" />
+		<enumItem name="Sphere" value="sphere" />
+		<enumItem name="Cylinder" value="cylinder" />
+		<enumItem name="Cone" value="cone" />
+		<enumItem name="Capsule" value="capsule" />
+		<enumItem name="TriangleMesh" value="triangle_mesh" />
+	</enum>
+	
+	<enum name="classType" type="string">
+		<enumItem name="Object" value="!Object" />
+		<enumItem name="Human" value="!Human" />
+		<enumItem name="Enemy" value="!Enemy" />
+		<enumItem name="Door" value="!Door" />
+	</enum>
+	
+	<class name="Action Area" usage="object">
+		<data groupName="Config Files" name="model_path" displayName="Model Path" type="string" />
+		<data groupName="Config Files" name="class" displayName="Class" type="classType" defaultValue="!Object" />
+
+		<data groupName="Physics settings"  name="physics_type" displayName="Type" type="physicsType" defaultValue="none"/>
+		
+	</class>
+
+</userDataTypes>
