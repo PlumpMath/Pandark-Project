@@ -1,4 +1,11 @@
-Pandark
-=======
+Pandark - Panda3d GameMaker
+==============================
 
-Panda3d + OgreMax = GameMaker
+WORLD EDITOR
+- 3dsMax
+- OgreMax
+
+PYTHON
+- Psyco
+- Yaml
+...
