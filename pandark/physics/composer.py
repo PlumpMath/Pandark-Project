@@ -3,7 +3,7 @@ import re
 class Composer(object):
 
 	def __init__(self):
-		self.shapesList = ['trimesh','hull','box','sphere','cylinder','capsule','cone']
+		Composer.shapesList = physicsMgr.addShape.keys()
 
 	def getSize(self,model):		
 		hpr = model.getHpr()
@@ -13,7 +13,6 @@ class Composer(object):
 		return maxLimit - minLimit
 
 	def setShape(self,model,body):
-
 		name = model.getName()
 
 		pos,hpr,scale = model.getPos(), model.getHpr(), model.getScale()	
@@ -89,7 +88,7 @@ class Composer(object):
 		physicsMgr.addShape[shapetype](body,geom)
 
 
-"""Testing ---------------------------------------------"""
+""" ============================ TEST ============================ """
 
 if __name__ == '__main__':
 
@@ -122,7 +121,7 @@ if __name__ == '__main__':
 	composer = Composer()
 
 
-	model = loader.loadModel('../../assets/models/chairs/multi_compound')
+	model = loader.loadModel('composer_test.egg')
 
 	composer.composeMulti(model)
 

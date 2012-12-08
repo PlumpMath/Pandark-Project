@@ -14,7 +14,10 @@ from panda3d.bullet import BulletCharacterControllerNode
 from panda3d.bullet import BulletGhostNode
 from panda3d.bullet import ZUp
 
-class PhysicsManager(object):    
+class PhysicsManager(object):
+
+    num_rigidBodies = 0
+    num_ghosts      = 0
 
     def __init__(self, gravity=(0,0,-9.81) ):
         self.world = BulletWorld()
@@ -44,7 +47,8 @@ class PhysicsManager(object):
         return props
 
     def getRigidBody(self, name=None):
-        return BulletRigidBodyNode(name or 'rigidbody')
+        PhysicsManager.num_rigidBodies+=1
+        return BulletRigidBodyNode(name or 'rigidbody'+str(PhysicsManager.num_rigidBodies) )
 
     def createRigidBody(self, shapetype, sizeOrGeom, props={}, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1), name=None):
         body = self.getRigidBody(name)
@@ -55,7 +59,8 @@ class PhysicsManager(object):
         return body
 
     def getGhost(self, name=None):
-        return BulletRigidBodyNode(name or 'ghost')
+        PhysicsManager.num_ghosts+=1
+        return BulletGhostNode(name or 'ghost'+str(PhysicsManager.num_ghosts) )
 
     def createGhost(self, shapetype, size, name=None):        
         ghost = self.getGhost(name)

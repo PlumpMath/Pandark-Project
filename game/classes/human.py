@@ -12,12 +12,12 @@ class Human(Generic):
 
 		size = self._getSize()
 
-		body = physicsMgr.createRigidBody(self.name,size,self.physics)
+		# body = physicsMgr.createRigidBody(self.name,size,self.physics)
 
-		self._np = self.parent.attachNewNode(body)
+		# self._np = self.parent.attachNewNode(body)
 
-		self._np.setPosQuat(self.pos,self.quat)
+		# self._np.setPosQuat(self.pos,self.quat)
 
-		self.model.reparentTo(self._np)
+		# self.model.reparentTo(self._np)
 
 		self._cleanUp()

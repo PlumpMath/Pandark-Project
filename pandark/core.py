@@ -1,16 +1,8 @@
-"""1968's core FSM."""
-
 from direct.fsm.FSM import FSM
 
 from menuproxy import MenuProxy
 
 from loader import Loader
-
-from pandark.managers.physicsmanager import PhysicsManager
-
-import __builtin__
-
-__builtin__.physicsMgr = PhysicsManager()
 
 import subprocess
 
@@ -21,25 +13,13 @@ import os
 class Core(FSM):
     """knows Menu, Scenario and Loading."""
     def __init__(self):
-        FSM.__init__(self, "Core Game Control")
-        # We might need to put a loading screen in front of menu if we get some
-        # fancy menu screens.
-        self.defaultTransitions = {"Menu":["Loading",],
-                                   "Loading":["Scenario",],
-                                   "Scenario":["Menu", "Loading"]
-                                   }
-        # Optional, but prevents a warning message.
-        # The scenario task chain gives us grouping option.
-        # It might get replaced by an own task manager, by chance.
-        #taskMgr.setupTaskChain("scenario", frameBudget=-1,numThreads=1)        
+        FSM.__init__(self, "Core Game Control")   
 
         self.doPhysics = physicsMgr.world.doPhysics
 
         self.getDt = globalClock.getDt
 
         self.loader = Loader(self.onLoad)
-
-        physicsMgr.debug().show() 
 
     def popen(self, onExit, popenArgs):
         def runInThread(onExit, popenArgs):
@@ -68,8 +48,7 @@ class Core(FSM):
     def onCache(self):
         print '--- Models were cached'
         #self.m=loader.loadModel('game/assets/models/humans/rachel') 
-        #self.m.reparentTo(render)
-         
+        #self.m.reparentTo(render)         
 
     def onLoad(self,scene):
         #self.popen2(self.onCache, ['ppython', 'load.py'])

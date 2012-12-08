@@ -8,6 +8,8 @@ class ActionArea(yaml.YAMLObject):
 		self.name = props['name']
 		dimensions = props['dimensions']
 
-		ghost = physicsMgr.createGhost( self.name, self.shape_type, dimensions )
-		ghostNP = render.attachNewNode(ghost)
-		ghostNP.setPos( props['origin'] )
+		print self.name
+
+		ghost = physicsMgr.createGhost( self.shape_type, dimensions )
+		# ghostNP = render.attachNewNode(ghost)
+		# ghostNP.setPos( props['origin'] )
