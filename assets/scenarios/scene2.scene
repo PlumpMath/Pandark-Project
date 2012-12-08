@@ -1,0 +1,29 @@
+<scene formatVersion="1.0" upAxis="z" unitsPerMeter="2" minOgreVersion="1.7" ogreMaxVersion="2.4.3" author="OgreMax Scene Exporter (www.ogremax.com)" application="3DS Max">
+    <environment>
+        <colourAmbient r="0.333333" g="0.333333" b="0.333333" />
+        <colourBackground r="0" g="0" b="0" />
+        <clipping near="0" far="100000" />
+    </environment>
+    <staticGeometries>
+        <staticGeometry visible="true" name="config" castShadows="true">
+            <origin x="-1.92602" y="-0.14037" z="2.07126" />
+            <dimensions x="5" y="5" z="7.44251" />
+        </staticGeometry>
+        <staticGeometry visible="true" name="config_1" castShadows="true">
+            <origin x="5.60876" y="-2.18534" z="1.69636" />
+            <dimensions x="2" y="2" z="3" />
+        </staticGeometry>
+    </staticGeometries>
+    <nodes>
+        <node name="Box01">
+            <position x="-5.89036" y="6.97042" z="0" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Box01" castShadows="true" receiveShadows="true" meshFile="Box01.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+        </node>
+    </nodes>
+</scene>

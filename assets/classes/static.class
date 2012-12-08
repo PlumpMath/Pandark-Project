@@ -1,0 +1,13 @@
+!Static
+model: chairs/chair
+
+#Physics
+mass: 0
+friction: 0.5
+restitution: 0.0
+adamping: 0.0
+ldamping: 0.0
+asleep: 0.0
+lsleep: 0.0
+deactivation: false
+kinematic: false

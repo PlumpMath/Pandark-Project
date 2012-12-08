@@ -1,0 +1,6 @@
+models:
+ - humans/rachel
+ - chairs/chair
+
+sounds:
+ - breathing.wav

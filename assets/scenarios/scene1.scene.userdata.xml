@@ -1,0 +1,10 @@
+<userData>
+    <entity __name="Box01">
+        <class>human</class>
+        <meshFile>humans/rachel</meshFile>       
+    </entity>
+    <entity __name="Box05">
+        <class>human</class>
+        <meshFile>chairs/chair</meshFile>       
+    </entity>
+</userData>

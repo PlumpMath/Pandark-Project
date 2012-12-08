@@ -1,0 +1,16 @@
+<userData>
+    <Entity __name="Box01">
+        <class>!Human</class>
+        <model_path>chairs/chair</model_path>
+        <mass>0</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+        <shape>box</shape>
+    </Entity>
+</userData>

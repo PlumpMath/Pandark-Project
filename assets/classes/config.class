@@ -1,0 +1,8 @@
+!ActionArea
+
+#Physics
+shape_type: cylinder
+
+commands:
+ - run()
+ - stop()
