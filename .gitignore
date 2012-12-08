@@ -33,6 +33,7 @@ local.properties
 ## Sublime
 #################
 
+.codeintel
 *.sublime-project
 *.sublime-workspace
 
