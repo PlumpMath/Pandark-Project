@@ -108,28 +108,39 @@ class PhysicsManager(object):
         shape = BulletConeShape(max(size.x,size.y)/2, size.z, ZUp)
         body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale) )
 
-    def __addConvexHull(self, body, model, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
-        #geom = model.node().getGeom(0)
+    def __addConvexHull(self, body, model, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):        
+        
+        def one():
+            geom = model.node().getGeom(0)          
+            shape = BulletConvexHullShape()
+            shape.addGeom(geom)
+            body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale) )
+            return []
+
+        children =  model.findAllMatches('**/+GeomNode') or one()
+
         model.flattenLight()
-        #geom = model.findAllMatches('**/+GeomNode').getPath(0).node().getGeom(0)
-        #shape = BulletConvexHullShape()
-        #shape.addGeom(geom)
-        for piece in  model.findAllMatches('**/+GeomNode'):
+
+        for piece in children:
             shape = BulletConvexHullShape()
             geom = piece.node().getGeom(0)
             shape.addGeom(geom)
             body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale) )
 
-    def __addTriangleMesh(self, body, model, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1), dynamic=True):
-        #geom = model.node().getGeom(0)
-        model.flattenLight()
-        geom = model.findAllMatches('**/+GeomNode').getPath(0).node().getGeom(0)
+    def __addTriangleMesh(self, body, model, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1), dynamic=True):        
+        
         mesh = BulletTriangleMesh()
-        # mesh.addGeom(geom)
-        # shape = BulletTriangleMeshShape(mesh, dynamic=dynamic )
-        # body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale) )
+      
+        def one():
+            geom = model.node().getGeom(0)            
+            mesh.addGeom(geom)
+            return []
 
-        for piece in  model.findAllMatches('**/+GeomNode'):
+        children =  model.findAllMatches('**/+GeomNode') or one()
+
+        model.flattenLight()
+
+        for piece in children:
             geom = piece.node().getGeom(0)
             mesh.addGeom(geom)
 

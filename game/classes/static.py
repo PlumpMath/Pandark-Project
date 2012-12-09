@@ -12,9 +12,9 @@ class Static(Generic):
 
     def __setPhysics(self):
 
-		body = physicsMgr.createRigidBody('hull',self.model,self.physics)
+		#body = physicsMgr.createRigidBody('hull',self.model,self.physics)
 
-		#body = physicsMgr.createRigidBody(self.physics['shapetype'],self.model,self.physics)
+		body = physicsMgr.createRigidBody(self.physics['shapetype'],self.model,self.physics)
 		
 		np = render.attachNewNode(body)
 
