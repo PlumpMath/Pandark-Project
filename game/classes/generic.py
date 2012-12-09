@@ -9,25 +9,35 @@ class Generic(yaml.YAMLObject):
     	self.parent = props['parent']
     	self.pos    = props['pos']
     	self.quat   = props['quat']
+        self._setPhysics()
 
     def getNode(self):
-    	return self._np
+        return self._np
+
+    def command(self,cmd):
+        pass
+
+    def _setPhysics(self):
+        body = physicsMgr.createRigidBody(self.physics['shapetype'],self.model,self.physics)
+        
+        np = render.attachNewNode(body)
+
+        np.setPosQuat(self.pos,self.quat)
+
+        self.model.reparentTo(np)
+
+        self._cleanUp()    
 
     def _getSize(self):
-        self.model.clearModelNodes()
-
-        self.model.flattenLight()
-
-        minLimit, maxLimit = self.model.getTightBounds()   
-
+        hpr = self.model.getHpr()
+        self.model.setHpr(0,0,0)
+        minLimit, maxLimit = self.model.getTightBounds()
+        self.model.setHpr(hpr) 
         return maxLimit - minLimit
 
     def _cleanUp(self):
     	self.init = None
-    	del self.init, self.parent, self.pos, self.quat
-
-    def command(self,cmd):
-    	pass
+    	del self.init, self.parent, self.pos, self.quat   
 
     def __del__(self):
     	self.__cleanUp()    	

@@ -3,7 +3,7 @@
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
         <shapetype>compound</shapetype>
-        <mass>0</mass>
+        <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>
@@ -31,7 +31,7 @@
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
         <shapetype>compound</shapetype>
-        <mass>0</mass>
+        <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>
@@ -45,7 +45,7 @@
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
         <shapetype>compound</shapetype>
-        <mass>0</mass>
+        <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>
@@ -59,7 +59,7 @@
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
         <shapetype>compound</shapetype>
-        <mass>0</mass>
+        <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>
@@ -73,7 +73,7 @@
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
         <shapetype>compound</shapetype>
-        <mass>0</mass>
+        <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>
@@ -87,7 +87,7 @@
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
         <shapetype>compound</shapetype>
-        <mass>0</mass>
+        <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>
@@ -101,7 +101,7 @@
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
         <shapetype>compound</shapetype>
-        <mass>0</mass>
+        <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>
@@ -115,7 +115,7 @@
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
         <shapetype>compound</shapetype>
-        <mass>0</mass>
+        <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>
@@ -129,7 +129,7 @@
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
         <shapetype>compound</shapetype>
-        <mass>0</mass>
+        <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>
@@ -143,7 +143,7 @@
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
         <shapetype>compound</shapetype>
-        <mass>0</mass>
+        <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>
@@ -157,7 +157,7 @@
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
         <shapetype>compound</shapetype>
-        <mass>0</mass>
+        <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>
@@ -171,7 +171,7 @@
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
         <shapetype>compound</shapetype>
-        <mass>0</mass>
+        <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>
@@ -185,7 +185,63 @@
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
         <shapetype>compound</shapetype>
+        <mass>5</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box01">
+        <class>!Static</class>
+        <model_path>plane</model_path>
+        <shapetype>box</shapetype>
         <mass>0</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box21">
+        <class>!Static</class>
+        <model_path>chairs/chair</model_path>
+        <shapetype>compound</shapetype>
+        <mass>100</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box22">
+        <class>!Static</class>
+        <model_path>chairs/chair</model_path>
+        <shapetype>compound</shapetype>
+        <mass>100</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box23">
+        <class>!Static</class>
+        <model_path>chairs/chair</model_path>
+        <shapetype>compound</shapetype>
+        <mass>100</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>
