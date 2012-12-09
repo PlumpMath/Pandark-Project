@@ -45,7 +45,7 @@ class Main(ShowBase):
 
     def load(self):
         #scene name
-        sceneName = "scene2"
+        sceneName = "scenario01"
         self.core.demand("Loading", sceneName)
 
     def exit(self):

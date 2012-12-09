@@ -36,6 +36,15 @@ class Composer(object):
 		not '-' in name or model.remove()
 
 
+	def createCompound(self,model,body):
+		np = render.attachNewNode(body)
+
+		children = model.find('**/*').getChildren() or model.getChildren()
+
+		[self.setShape(child,body) for child in children]			
+
+		return np
+
 	def composeMulti(self,model,group='*'):
 		children = model.find('**/*').getChildren()
 
@@ -56,13 +65,8 @@ class Composer(object):
 
 				physicsMgr.world.attachRigidBody( body )
 
-				np = render.attachNewNode(body)
+				np = self.createCompound(child,body)
 
-				children2 = child.getChildren()
-
-				for child2 in children2:
-					self.setShape(child2,body)
-				
 				child.reparentTo(np)
 
 				continue
@@ -98,41 +102,23 @@ if __name__ == '__main__':
 
 	physicsMgr.debug().show()
 
-	model2 = loader.loadModel('composer_test')
+	render.setRenderModeWireframe()
 
-	model2.clearModelNodes()
-
-	#render.setRenderModeWireframe()
-
-	#base.wireframeOff()
-
-	# body2 = physicsMgr.getRigidBody()
-
-	# body2.setMass(0)
-
-	# physicsMgr.world.attachRigidBody( body2 )
-
-	# np2 = render.attachNewNode(body2)
-
-	# model2.reparentTo(np2)
+	model = loader.loadModel('../../assets/models/chairs/chair')
 
 	composer = Composer()
 
+	multi = 0
 
-	model = loader.loadModel('composer_test.egg')
-
-	composer.composeMulti(model)
-
-
-	# model1 = loader.loadModel('../../assets/models/chairs/mix_compound')
-	# body1 = physicsMgr.getRigidBody()
-	# #print body1.getFriction()
-	# body1.setMass(0)
-	# body1.setDeactivationEnabled(False)
-	# physicsMgr.world.attachRigidBody( body1 )
-	# np1 = render.attachNewNode(body1)
-	# model1.reparentTo(np1)
-	# composer.composeMix(model1,body1)
+	if multi:		
+		composer.composeMulti(model)
+	else:	
+		body = physicsMgr.getRigidBody()	
+		body.setMass(0)
+		#body.setDeactivationEnabled(False)
+		np = composer.createCompound(model,body)
+		physicsMgr.world.attachRigidBody(body)
+		model.reparentTo(np)
 
 
 	def task(task):

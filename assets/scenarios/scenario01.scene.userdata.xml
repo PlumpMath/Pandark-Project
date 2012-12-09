@@ -1,0 +1,30 @@
+<userData>
+    <Entity __name="box02">
+        <class>!Human</class>
+        <model_path>chairs/chair</model_path>
+        <shape>box</shape>
+        <mass>1</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="box01">
+        <class>!Human</class>
+        <model_path>chairs/chair</model_path>
+        <shape>box</shape>
+        <mass>1</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+</userData>

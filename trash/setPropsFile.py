@@ -17,7 +17,6 @@ class Test:
 
 func = {}
 
-
 name = "hide-box-props"
 
 shapetype = re.findall("[a-z]+",name.lower())
