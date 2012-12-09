@@ -13,6 +13,8 @@ class Composer(object):
 		return maxLimit - minLimit
 
 	def setShape(self,model,body):
+		#To Re-Do
+
 		name = model.getName()
 
 		pos,hpr,scale = model.getPos(), model.getHpr(), model.getScale()	
@@ -22,11 +24,10 @@ class Composer(object):
 		if set(shapetype).issubset( ['trimesh','hull'] ):
 			#model.flattenLight()
 			sizeOrGeom = model.node().getGeom(0)
-			print sizeOrGeom
 		else:				
 			sizeOrGeom = self.getSize(model)
 
-		shapetype =  filter(None,shapetype)
+		shapetype = filter(None,shapetype)
 
 		#if shapetype[0] in list(self.shapes.keys()):
 		if shapetype[0] in self.shapesList:
@@ -43,10 +44,15 @@ class Composer(object):
 			name = child.getName()
 
 			if len( child.getChildren() ) > 1:
+
 				body = physicsMgr.getRigidBody()
 
+				'''------------------
+				TODO:
+				- load props file
+				------------------'''
+
 				body.setMass(0)
-				#body.setDeactivationEnabled(False)
 
 				physicsMgr.world.attachRigidBody( body )
 
@@ -79,14 +85,6 @@ class Composer(object):
 
 			physicsMgr.world.attachRigidBody( body )
 
-	def addPrimitiveShape(self,body,model,shapetype):
-		size = self.getSize(model)
-		physicsMgr.addShape[shapetype](body,size)
-
-	def addComplexShape(self,body,model,shapetype):
-		geom = model.node().getGeom(0)
-		physicsMgr.addShape[shapetype](body,geom)
-
 
 """ ============================ TEST ============================ """
 
@@ -100,11 +98,11 @@ if __name__ == '__main__':
 
 	physicsMgr.debug().show()
 
-	model2 = loader.loadModel('../../assets/models/chairs/mix_compound')
+	model2 = loader.loadModel('composer_test')
 
 	model2.clearModelNodes()
 
-	render.setRenderModeWireframe()
+	#render.setRenderModeWireframe()
 
 	#base.wireframeOff()
 
