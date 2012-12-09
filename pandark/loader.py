@@ -145,7 +145,7 @@ class Loader(object):
         #print xmlNode.getAttribute('id')  
         props = {}    
         props['name']      = xmlNode.getAttribute('name')    
-        props['pos']       = self.__getVec3(xmlNode,'position')
+        props['pos']       = self.__getPos(xmlNode)
         props['quat']      = self.__getQuat(xmlNode)
         props['scale']     = self.__getVec3(xmlNode,'scale')
         props['groupName'] = xmlNode.parentNode.getAttribute('name') #or 'render'
@@ -170,7 +170,16 @@ class Loader(object):
         x = float( vec3.getAttribute('x') )
         y = float( vec3.getAttribute('y') )
         z = float( vec3.getAttribute('z') )
-        return Vec3(x,y,z) 
+        return Vec3(x,y,z)
+
+
+    def __getPos(self,xmlNode):
+        '''Vec3'''
+        vec3 = xmlNode.getElementsByTagName('position')[0]            
+        x = float( vec3.getAttribute('x') )
+        y = float( vec3.getAttribute('y') )
+        z = float( vec3.getAttribute('z') )
+        return Vec3(x,y,z/2)
     
     def __getQuat(self,xmlNode):
         '''quaternion'''

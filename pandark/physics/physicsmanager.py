@@ -38,7 +38,7 @@ class PhysicsManager(object):
         #self.composer = Composer()
         self.addShape['compound'] = self.__addCompound
 
-        self.shapesList = self.addShape.keys()
+       # self.shapesList = self.addShape.keys()
 
     def getRigidBodyDefaultProps(self):
         props = {}
@@ -199,9 +199,8 @@ class PhysicsManager(object):
         shapetype = re.findall("[-a-z]+",name.lower())[0].split('-')
 
         shapetype = filter(None,shapetype)
-
-        #if shapetype[0] in list(self.shapes.keys()):
-        if shapetype[0] in self.shapesList:
+        
+        if shapetype[0] in self.addShape.keys():
             physicsMgr.addShape[shapetype[0]](body,model,pos,hpr,scale)
 
         not '-' in name or model.remove()

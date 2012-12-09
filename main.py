@@ -41,6 +41,10 @@ class Main(ShowBase):
 
         physicsMgr.debug().show()
 
+
+        m = loader.loadModel('smiley')
+        m.reparentTo(render)
+
         self.run()
 
     def load(self):
