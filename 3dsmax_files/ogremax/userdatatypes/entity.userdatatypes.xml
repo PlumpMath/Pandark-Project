@@ -2,9 +2,8 @@
 	
 	<enum name="Shapes" type="string">
 		<enumItem name="None" value="none" />
-		<enumItem name="Auto-Compound" value="auto_compound" />
-		<enumItem name="Hidden-Compound" value="hidden_compound" />
-		<!--<enumItem name="Mix-Compound" value="mix_compound" />-->
+		<enumItem name="Compound" value="compound" />
+		<enumItem name="MultiCompound" value="multi_compound" />
 		<enumItem name="Box" value="box" />
 		<enumItem name="Sphere" value="sphere" />
 		<enumItem name="Cylinder" value="cylinder" />
@@ -16,16 +15,16 @@
 	</enum>
 	
 	<enum name="Classes" type="string">
-		<enumItem name="Human" value="!Human" />
-		<enumItem name="Doctor" value="!Doctor" />
-		<enumItem name="Soldier" value="!Soldier" />
+		<enumItem name="None" value="none" />
+		<enumItem name="Static" value="!Static" />
+		<enumItem name="Human" value="!Human" />		
 	</enum>
 	
 	<class name="Entity" usage="object">
 		<data groupName="General settings" name="class" displayName="Class" type="Classes" defaultValue="!Object" />
 		<data groupName="General settings" name="model_path" displayName="Model Path" type="string" />		
 
-		<data groupName="Physics settings"  name="shape" displayName="Shape Type" type="Shapes" defaultValue="none"/>
+		<data groupName="Physics settings"  name="shapetype" displayName="Shape Type" type="Shapes" defaultValue="none"/>
 		<data groupName="Physics settings"  name="mass" displayName="Mass" type="float" defaultValue="1.0" maxValue="1000000.0"/>
 		<data groupName="Physics settings"  name="friction" displayName="Friction" type="float" defaultValue="0.5"/>
 		<data groupName="Physics settings"  name="ldamping" displayName="Linear Damping" type="float" defaultValue="0.0" maxValue="1.0"/>

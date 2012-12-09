@@ -14,6 +14,8 @@ from panda3d.bullet import BulletCharacterControllerNode
 from panda3d.bullet import BulletGhostNode
 from panda3d.bullet import ZUp
 
+import re
+
 class PhysicsManager(object):
 
     num_rigidBodies = 0
@@ -21,7 +23,7 @@ class PhysicsManager(object):
 
     def __init__(self, gravity=(0,0,-9.81) ):
         self.world = BulletWorld()
-        self.world.setGravity(Vec3(gravity) )
+        self.world.setGravity(Vec3(gravity) )        
 
         self.addShape = {}
         self.addShape['plane']    = self.__addPlane
@@ -32,6 +34,11 @@ class PhysicsManager(object):
         self.addShape['cone']     = self.__addCone
         self.addShape['hull']     = self.__addConvexHull
         self.addShape['trimesh']  = self.__addTriangleMesh
+
+        #self.composer = Composer()
+        self.addShape['compound'] = self.__addCompound
+
+        self.shapesList = self.addShape.keys()
 
     def getRigidBodyDefaultProps(self):
         props = {}
@@ -50,13 +57,13 @@ class PhysicsManager(object):
         PhysicsManager.num_rigidBodies+=1
         return BulletRigidBodyNode(name or 'rigidbody'+str(PhysicsManager.num_rigidBodies) )
 
-    def createRigidBody(self, shapetype, sizeOrGeom, props={}, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1), name=None):
+    def createRigidBody(self, shapetype, model, props={}, name=None):
         body = self.getRigidBody(name)
-        self.addShape[shapetype](body,sizeOrGeom,pos,hpr,scale)
+        self.addShape[shapetype](body, model)
         props = dict(self.getRigidBodyDefaultProps().items() + props.items() )
         self.setBodyProps(body, props)
         self.world.attachRigidBody( body )
-        return body
+        return body         
 
     def getGhost(self, name=None):
         PhysicsManager.num_ghosts+=1
@@ -70,39 +77,65 @@ class PhysicsManager(object):
 
     def attachRigidBody(self, body, props):
         self.setBodyProps(body, props)
-        self.world.attachRigidBody(body)  
+        self.world.attachRigidBody(body)
 
-    def __addSphere(self, body, size, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
+    def __addCompound(self, body, model):
+        self.createCompound(model,body)   
+
+    def __addSphere(self, body, model, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
+        size = self.getSize(model)
         shape = BulletSphereShape( max(size)/2 )
         body.addShape(shape, TransformState.makePosHprScale(pos,hpr,scale) )
 
-    def __addBox(self, body, size, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
+    def __addBox(self, body, model, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
+        size = self.getSize(model)
         shape = BulletBoxShape( size/2 )
         body.addShape(shape, TransformState.makePosHprScale(pos,hpr,scale) )
 
-    def __addCylinder(self, body, size, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
+    def __addCylinder(self, body, model, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
+        size = self.getSize(model)
         shape = BulletCylinderShape(max(size.x,size.y)/2, size.z, ZUp)
         body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale) )
 
-    def __addCapsule(self, body, size, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
+    def __addCapsule(self, body, model, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
+        size = self.getSize(model)
         diam = max(size.x,size.y)
         shape = BulletCapsuleShape(diam/2, size.z-diam, ZUp)       
         body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale) )
 
-    def __addCone(self, body, size, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
+    def __addCone(self, body, model, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
+        size = self.getSize(model)
         shape = BulletConeShape(max(size.x,size.y)/2, size.z, ZUp)
         body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale) )
 
-    def __addConvexHull(self, body, geom, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
-        shape = BulletConvexHullShape()
-        shape.addGeom(geom)
-        body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale) )
+    def __addConvexHull(self, body, model, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
+        #geom = model.node().getGeom(0)
+        model.flattenLight()
+        #geom = model.findAllMatches('**/+GeomNode').getPath(0).node().getGeom(0)
+        #shape = BulletConvexHullShape()
+        #shape.addGeom(geom)
+        for piece in  model.findAllMatches('**/+GeomNode'):
+            shape = BulletConvexHullShape()
+            geom = piece.node().getGeom(0)
+            shape.addGeom(geom)
+            body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale) )
 
-    def __addTriangleMesh(self, body, geom, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1), dynamic=True):
+    def __addTriangleMesh(self, body, model, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1), dynamic=True):
+        #geom = model.node().getGeom(0)
+        model.flattenLight()
+        geom = model.findAllMatches('**/+GeomNode').getPath(0).node().getGeom(0)
         mesh = BulletTriangleMesh()
-        mesh.addGeom(geom)
+        # mesh.addGeom(geom)
+        # shape = BulletTriangleMeshShape(mesh, dynamic=dynamic )
+        # body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale) )
+
+        for piece in  model.findAllMatches('**/+GeomNode'):
+            geom = piece.node().getGeom(0)
+            mesh.addGeom(geom)
+
         shape = BulletTriangleMeshShape(mesh, dynamic=dynamic )
         body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale) )
+
 
     def __addPlane(self, body, size=(0,0,1), pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
         shape = BulletPlaneShape(Vec3(size), 0)
@@ -137,6 +170,36 @@ class PhysicsManager(object):
         debugNP.node().showNormals(False)        
         self.world.setDebugNode(debugNP.node())
         return debugNP
+
+
+    def getSize(self,model):        
+        hpr = model.getHpr()
+        model.setHpr(0,0,0)
+        minLimit, maxLimit = model.getTightBounds()
+        model.setHpr(hpr) 
+        return maxLimit - minLimit
+
+    def setShape(self, model, body):
+        #To Re-Do
+        name = model.getName()
+
+        pos,hpr,scale = model.getPos(), model.getHpr(), model.getScale()    
+
+        shapetype = re.findall("[-a-z]+",name.lower())[0].split('-')
+
+        shapetype = filter(None,shapetype)
+
+        #if shapetype[0] in list(self.shapes.keys()):
+        if shapetype[0] in self.shapesList:
+            physicsMgr.addShape[shapetype[0]](body,model,pos,hpr,scale)
+
+        not '-' in name or model.remove()
+
+
+    def createCompound(self, model, body):
+        children = model.find('**/*').getChildren() or model.getChildren()
+
+        [self.setShape(child,body) for child in children]  
 
 
 """ ============================ TEST ============================ """

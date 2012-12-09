@@ -1,9 +1,9 @@
 <userData>
-    <Entity __name="box02">
-        <class>!Human</class>
+    <Entity __name="Box01">
+        <class>!Static</class>
         <model_path>chairs/chair</model_path>
-        <shape>box</shape>
-        <mass>1</mass>
+        <shapetype>compound</shapetype>
+        <mass>0</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>
@@ -13,11 +13,179 @@
         <deactivation>true</deactivation>
         <kinematic>false</kinematic>
     </Entity>
-    <Entity __name="box01">
-        <class>!Human</class>
+    <Entity __name="Box02">
+        <class>!Static</class>
         <model_path>chairs/chair</model_path>
-        <shape>box</shape>
-        <mass>1</mass>
+        <shapetype>compound</shapetype>
+        <mass>0</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box03">
+        <class>!Static</class>
+        <model_path>chairs/chair</model_path>
+        <shapetype>compound</shapetype>
+        <mass>0</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box04">
+        <class>!Static</class>
+        <model_path>chairs/chair</model_path>
+        <shapetype>compound</shapetype>
+        <mass>0</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box05">
+        <class>!Static</class>
+        <model_path>chairs/chair</model_path>
+        <shapetype>compound</shapetype>
+        <mass>0</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box06">
+        <class>!Static</class>
+        <model_path>chairs/chair</model_path>
+        <shapetype>compound</shapetype>
+        <mass>0</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box07">
+        <class>!Static</class>
+        <model_path>chairs/chair</model_path>
+        <shapetype>compound</shapetype>
+        <mass>0</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box08">
+        <class>!Static</class>
+        <model_path>chairs/chair</model_path>
+        <shapetype>compound</shapetype>
+        <mass>0</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box09">
+        <class>!Static</class>
+        <model_path>chairs/chair</model_path>
+        <shapetype>compound</shapetype>
+        <mass>0</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box10">
+        <class>!Static</class>
+        <model_path>chairs/chair</model_path>
+        <shapetype>compound</shapetype>
+        <mass>0</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box11">
+        <class>!Static</class>
+        <model_path>chairs/chair</model_path>
+        <shapetype>compound</shapetype>
+        <mass>0</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box12">
+        <class>!Static</class>
+        <model_path>chairs/chair</model_path>
+        <shapetype>compound</shapetype>
+        <mass>0</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box13">
+        <class>!Static</class>
+        <model_path>chairs/chair</model_path>
+        <shapetype>compound</shapetype>
+        <mass>5</mass>
+        <friction>0.5</friction>
+        <ldamping>0</ldamping>
+        <adamping>0</adamping>
+        <lsleep>0.8</lsleep>
+        <asleep>1</asleep>
+        <restitution>0</restitution>
+        <deactivation>true</deactivation>
+        <kinematic>false</kinematic>
+    </Entity>
+    <Entity __name="Box14">
+        <class>!Static</class>
+        <model_path>chairs/chair</model_path>
+        <shapetype>compound</shapetype>
+        <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>

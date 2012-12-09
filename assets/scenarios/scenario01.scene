@@ -5,21 +5,141 @@
         <clipping near="0" far="100000" />
     </environment>
     <nodes>
-        <node name="box02">
-            <position x="2.28812" y="-27.6472" z="2.26499" />
+        <node name="Box01">
+            <position x="-0.0567305" y="1.20152" z="2.4" />
             <scale x="1" y="1" z="1" />
             <rotation qx="0" qy="0" qz="0" qw="1" />
-            <entity name="box02" castShadows="true" receiveShadows="true" meshFile="">
+            <entity name="Box01" castShadows="true" receiveShadows="true" meshFile="Box01.mesh">
                 <subentities>
                     <subentity index="0" materialName="NoMaterial" />
                 </subentities>
             </entity>
         </node>
-        <node name="box01">
-            <position x="2.28812" y="27.3045" z="2.26499" />
+        <node name="Box02">
+            <position x="-0.0567305" y="-1.43598" z="2.4" />
             <scale x="1" y="1" z="1" />
             <rotation qx="0" qy="0" qz="0" qw="1" />
-            <entity name="box01" castShadows="true" receiveShadows="true" meshFile="box01.mesh">
+            <entity name="Box02" castShadows="true" receiveShadows="true" meshFile="Box02.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Box03">
+            <position x="2.89167" y="-1.43598" z="2.4" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Box03" castShadows="true" receiveShadows="true" meshFile="Box03.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Box04">
+            <position x="2.89167" y="1.20152" z="2.4" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Box04" castShadows="true" receiveShadows="true" meshFile="Box04.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Box05">
+            <position x="-2.74942" y="-1.43598" z="2.4" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Box05" castShadows="true" receiveShadows="true" meshFile="Box05.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Box06">
+            <position x="-2.74942" y="1.20152" z="2.4" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Box06" castShadows="true" receiveShadows="true" meshFile="Box06.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Box07">
+            <position x="-0.0567305" y="4.06945" z="2.4" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Box07" castShadows="true" receiveShadows="true" meshFile="Box07.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Box08">
+            <position x="2.89167" y="4.06945" z="2.4" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Box08" castShadows="true" receiveShadows="true" meshFile="Box08.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Box09">
+            <position x="2.89167" y="6.70695" z="2.4" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Box09" castShadows="true" receiveShadows="true" meshFile="Box09.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Box10">
+            <position x="-2.74942" y="6.70695" z="2.4" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Box10" castShadows="true" receiveShadows="true" meshFile="Box10.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Box11">
+            <position x="-0.0567305" y="6.70695" z="2.4" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Box11" castShadows="true" receiveShadows="true" meshFile="Box11.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Box12">
+            <position x="-2.74942" y="4.06945" z="2.4" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Box12" castShadows="true" receiveShadows="true" meshFile="Box12.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Box13">
+            <position x="-0.0567305" y="1.34689" z="37.993" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0.661693" qy="0" qz="0" qw="0.749775" />
+            <entity name="Box13" castShadows="true" receiveShadows="true" meshFile="Box13.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Box14">
+            <position x="-0.0567305" y="0.990338" z="35.1473" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0.661693" qy="0" qz="0" qw="0.749775" />
+            <entity name="Box14" castShadows="true" receiveShadows="true" meshFile="Box14.mesh">
                 <subentities>
                     <subentity index="0" materialName="NoMaterial" />
                 </subentities>

@@ -24,6 +24,10 @@ class Composer(object):
 		if set(shapetype).issubset( ['trimesh','hull'] ):
 			#model.flattenLight()
 			sizeOrGeom = model.node().getGeom(0)
+
+		elif set(shapetype).issubset( ['compound'] ):
+			#model.flattenLight()
+			sizeOrGeom = model
 		else:				
 			sizeOrGeom = self.getSize(model)
 

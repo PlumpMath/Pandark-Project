@@ -3,9 +3,7 @@ from panda3d.core import NodePath
 #from direct.stdpy import thread
 import yaml
 
-from game.classes.human import Human
-from game.classes.door import Door
-from game.classes.actionarea import ActionArea
+import game.classes
 
 class Builder(object):
 

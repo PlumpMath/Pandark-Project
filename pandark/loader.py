@@ -8,7 +8,7 @@ from builder import Builder
 class Loader(object): 
 
     physics_attrs =\
-    ['shape','mass','friction','ldamping','adamping','lsleep','asleep','restitution','deactivation','kinematic'] 
+    ['shapetype','mass','friction','ldamping','adamping','lsleep','asleep','restitution','deactivation','kinematic'] 
 
     def __init__(self,callback):
         self.callback = callback
