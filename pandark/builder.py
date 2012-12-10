@@ -1,9 +1,53 @@
-from panda3d.core import NodePath
+from panda3d.core import NodePath, Point3
 #from direct.stdpy.file import open as openFile
 #from direct.stdpy import thread
 import yaml
 
 import game.classes
+
+from panda3d.core import PointLight, Spotlight, PerspectiveLens
+
+class Test(object):
+
+	def __init__(self):
+		print "======================================================="
+
+class LightManager(object):
+	def __init__(self):
+		self.setLight = {}
+		self.setLight['point'] = self.__setPointLight	
+		self.setLight['spot'] = self.__setSpotLight
+
+	def __setPointLight(self,props):
+		for p in props:print p,props[p]
+		light = PointLight(props['name'])
+		light.showFrustum()	
+		#print light.getPoint()
+		#light.setPoint( Point3(props['pos']) )
+		#light.upcastToLensNode()
+		self.__setLight(light,props)
+
+	def __setSpotLight(self,props):
+		light = Spotlight(props['name'])
+		lens = PerspectiveLens()
+		print 1.0472 / 0.0174533#(x/ogremax value)
+		lens.setFov(60)
+		light.setLens(lens)
+		light.showFrustum()	
+		print 'exp',light.getExponent()
+
+		self.__setLight(light,props)
+
+	def __setLight(self,light,props):
+		light.setColor(props['colourDiffuse'])
+		light.setAttenuation(props['attenuation'])
+		light.setSpecularColor(props['colourSpecular'])
+		node = render.attachNewNode(light)
+		node.setPosQuat(props['pos'], props['quat'] )
+		render.setLight(node)
+
+
+lightMgr = LightManager()
 
 class Builder(object):
 
@@ -22,6 +66,7 @@ class Builder(object):
 
 	def start(self):
 		[self.createNode(props) for props in self.nodes]
+		[self.createLight(props) for props in self.lights]
 		[self.createEntity(props) for props in self.entities]
 		[self.createStaticGeoms(props) for props in self.staticGeoms]
 
@@ -39,8 +84,8 @@ class Builder(object):
 	def getEnt(self,name):		
 		return self.__entitiesList[name]
 
-	def getLight(self,name):
-		return self.__lightsList[name]
+	def createLight(self,props):
+		lightMgr.setLight[props['type'] ](props)
 
 	def createNode(self,props):
 		#animations = self.animations[props['name']]

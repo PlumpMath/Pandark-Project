@@ -39,11 +39,17 @@ class Main(ShowBase):
         self.accept('a', self.load)
         self.accept('escape', self.exit)
 
-        physicsMgr.debug().show()
-
+        #physicsMgr.debug().show()
 
         #m = loader.loadModel('smiley')
         #m.reparentTo(render)
+        from panda3d.core import AmbientLight
+        alight = AmbientLight('alight')
+        alight.setColor((0.2, 0.2, 0.2, 1))
+        alnp = render.attachNewNode(alight)
+        render.setLight(alnp)
+
+        render.setShaderAuto()
 
         self.run()
 

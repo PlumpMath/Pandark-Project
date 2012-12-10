@@ -1,4 +1,4 @@
-from panda3d.core import Vec3, Quat
+from panda3d.core import Vec3, Vec4, Quat
 from xml.dom import minidom
 from builder import Builder
 # import time
@@ -103,7 +103,7 @@ class Loader(object):
             if xmlNode.getElementsByTagName('entity'):
                 self.entities.append( self.__getBasicProps(xmlNode) )
 
-            elif xmlNode.getElementsByTagName('light'): 
+            elif xmlNode.getElementsByTagName('light'):
                 self.lights.append( self.__getLightProps(xmlNode) )
             
             elif xmlNode.getElementsByTagName('camera'): 
@@ -159,9 +159,21 @@ class Loader(object):
         props = self.__getBasicProps(xmlNode)
         light = xmlNode.getElementsByTagName('light')[0]
         props['type']    = light.getAttribute('type')
-        props['power']   = light.getAttribute('power')
+        #props['power']   = light.getAttribute('power')
         props['visible'] = light.getAttribute('visible')
-        props['color']   = self.__getColor(xmlNode)
+        props['colourDiffuse'] = self.__getColor(xmlNode)
+        props['colourSpecular'] = self.__getColor(xmlNode,'colourSpecular')
+
+        attenuation = light.getElementsByTagName('lightAttenuation')[0]
+        constant = float(attenuation.getAttribute('constant') )
+        linear   = float(attenuation.getAttribute('linear') )
+        quadric  = float(attenuation.getAttribute('quadric') )
+        props['attenuation'] = Vec3(constant,linear,quadric)
+
+        #Hack
+        pos = props['pos']
+        props['pos'] = Vec3(pos.x,pos.y,pos.z*2)
+
         return props
 
     def __getVec3(self,xmlNode,tag):
@@ -178,8 +190,8 @@ class Loader(object):
         vec3 = xmlNode.getElementsByTagName('position')[0]            
         x = float( vec3.getAttribute('x') )
         y = float( vec3.getAttribute('y') )
-        z = float( vec3.getAttribute('z') )
-        return Vec3(x,y,z/2)
+        z = float( vec3.getAttribute('z') ) / 2
+        return Vec3(x,y,z)
     
     def __getQuat(self,xmlNode):
         '''quaternion'''
@@ -196,7 +208,7 @@ class Loader(object):
         r = float( xmlNode.getAttribute('r') )
         g = float( xmlNode.getAttribute('g') )
         b = float( xmlNode.getAttribute('b') )
-        return (r,g,b,alpha)
+        return Vec4(r,g,b,alpha)
     
     def __getClipping(self,xmlNode):
         clipping = xmlNode.getElementsByTagName('clipping')[0] 
