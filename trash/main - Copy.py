@@ -1,14 +1,22 @@
-import os
-from pandac.PandaModules import loadPrcFile, loadPrcFileData
+from pandac.PandaModules import loadPrcFile #, loadPrcFileData
 from pandac.PandaModules import Filename
 loadPrcFile(Filename.expandFrom("$MAIN_DIR/etc/config.prc"))
 
+# from panda3d.core import ConfigVariableString
+# maxThreads = ConfigVariableString( 'max-num-threads', '' )
 
-coresNum =  int( os.environ["NUMBER_OF_PROCESSORS"] )
+# # import multiprocessing
+# # coresNum = multiprocessing.cpu_count()
 
-threadsNum = str(pow(coresNum,3) )
+# import os
+# coresNum =  int( os.environ["NUMBER_OF_PROCESSORS"] )
 
-loadPrcFileData('', 'loader-num-threads ' + threadsNum ) 
+# threadsNum = [ pow(coresNum,3) , int(maxThreads.getValue()) ]
+
+# loadPrcFileData('', 'loader-num-threads ' + str( min(threadsNum) ) )
+
+# if coresNum > 1:
+#     loadPrcFileData('', 'threading-model  cull/draw' )
 
 from direct.showbase.ShowBase import ShowBase
 
@@ -37,7 +45,7 @@ class Main(ShowBase):
         #m.reparentTo(render)
         from panda3d.core import AmbientLight
         alight = AmbientLight('alight')
-        alight.setColor((0.2, 0.2, 0.2, 1))
+        alight.setColor((0.1, 0.1, 0.1, 1))
         alnp = render.attachNewNode(alight)
         render.setLight(alnp)
 

@@ -1,16 +1,16 @@
-from panda3d.core import Vec3, Vec4, Quat
+######################
+## OgreMax File Parser
+## By Fred Ukita
+######################
+
+from panda3d.core import Vec2, Vec3, Vec4, Quat
 from xml.dom import minidom
 from builder import Builder
-# import time
-# import yaml
-#from direct.stdpy import thread
-#from greenlet import greenlet
-class Loader(object): 
 
-    physics_attrs =\
-    ['shapetype','mass','friction','ldamping','adamping','lsleep','asleep','restitution','deactivation','kinematic'] 
+class Loader(object):    
 
     def __init__(self,callback):
+        self.physics_attrs = ['shapetype','mass','friction','ldamping','adamping','lsleep','asleep','restitution','deactivation','kinematic'] 
         self.callback = callback
         self.reset()
 
@@ -44,7 +44,7 @@ class Loader(object):
 
     def entitiesSetup(self,entities):
 
-        #objs = {}
+        """Yaml Generator"""
 
         models = []
 
@@ -74,8 +74,9 @@ class Loader(object):
 
             models.append( ent.getElementsByTagName('model_path')[0].childNodes[0].data )
 
-        models = list( set(models) )  
+        models = list(set(models) )  
 
+        '''TODO: Load Manager'''
         loader.loadModel(models)
 
     def loadScene(self,sceneName):
@@ -158,23 +159,35 @@ class Loader(object):
         '''Light'''
         props = self.__getBasicProps(xmlNode)
         light = xmlNode.getElementsByTagName('light')[0]
-        props['type']    = light.getAttribute('type')
-        #props['power']   = light.getAttribute('power')
+        props['type']    = light.getAttribute('type') 
+        #props['power']   = light.getAttribute('power')       
         props['visible'] = light.getAttribute('visible')
-        props['colourDiffuse'] = self.__getColor(xmlNode)
+        props['colourDiffuse']  = self.__getColor(xmlNode)
         props['colourSpecular'] = self.__getColor(xmlNode,'colourSpecular')
+        props['castShadows']    = self.str2Bool(light.getAttribute('castShadows') )        
 
-        attenuation = light.getElementsByTagName('lightAttenuation')[0]
-        constant = float(attenuation.getAttribute('constant') )
-        linear   = float(attenuation.getAttribute('linear') )
-        quadric  = float(attenuation.getAttribute('quadric') )
-        props['attenuation'] = Vec3(constant,linear,quadric)
+        '''Light Attenuation'''
+        if light.getElementsByTagName('lightAttenuation'):
+            attenuation = light.getElementsByTagName('lightAttenuation')[0]
+            constant = float(attenuation.getAttribute('constant') )
+            linear   = float(attenuation.getAttribute('linear') )
+            quadric  = float(attenuation.getAttribute('quadric') )
+            props['attenuation'] = Vec3(constant,linear,quadric)
+
+        '''Light Range'''
+        lightRange = light.getElementsByTagName('lightRange')
+        props['range'] = not lightRange or self.__getRange(lightRange[0])
 
         #Hack
         pos = props['pos']
         props['pos'] = Vec3(pos.x,pos.y,pos.z*2)
 
         return props
+
+    def __getRange(self,xmlNode):        
+        inner = float(xmlNode.getAttribute('inner') )
+        outer = float(xmlNode.getAttribute('outer') )
+        return Vec2(outer, inner)
 
     def __getVec3(self,xmlNode,tag):
         '''Vec3'''
@@ -183,7 +196,6 @@ class Loader(object):
         y = float( vec3.getAttribute('y') )
         z = float( vec3.getAttribute('z') )
         return Vec3(x,y,z)
-
 
     def __getPos(self,xmlNode):
         '''Vec3'''
