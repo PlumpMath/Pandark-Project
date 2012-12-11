@@ -3,12 +3,11 @@ from pandac.PandaModules import loadPrcFile, loadPrcFileData
 from pandac.PandaModules import Filename
 loadPrcFile(Filename.expandFrom("$MAIN_DIR/etc/config.prc"))
 
+# coresNum =  int( os.environ["NUMBER_OF_PROCESSORS"] )
 
-coresNum =  int( os.environ["NUMBER_OF_PROCESSORS"] )
+# threadsNum = str(pow(coresNum,3) )
 
-threadsNum = str(pow(coresNum,3) )
-
-loadPrcFileData('', 'loader-num-threads ' + threadsNum ) 
+# loadPrcFileData('', 'loader-num-threads ' + threadsNum ) 
 
 from direct.showbase.ShowBase import ShowBase
 

@@ -1,14 +1,9 @@
-# GLOBAL AZURE SETTINGS
-# ---------------------
-# These settings are read at the start of a game and override Panda3D's
-# settings. All except those starting with azure- are reserved by Panda3D.
-# For all panda settings, see:
 # http://www.panda3d.org/wiki/index.php/List_of_All_Config_Variables
 
 
 # window
 # ------
-window-title Azure: Infinite Skies
+window-title Pandark-Project
 win-origin 50 50
 win-size 800 600
 #win-size 1280 1024
@@ -20,10 +15,10 @@ fullscreen false
 # paths
 # -----
 # where to look for all models, textures, fonts etc.
-model-path $MAIN_DIR/assets/models
+model-path assets/models
 # OS dependent - will be determined by python. change to force
-model-cache-dir $MAIN_DIR/tmp/pandacache
-
+model-cache-dir xtmp/pandacache
+default-model-extension .egg
 
 # graphics
 # --------
@@ -66,17 +61,17 @@ load-display *
 display-lists true
 
 # set higher on multicore processors
-#loader-num-threads 1
+loader-num-threads 1
 
 # max-num-threads
-max-num-threads 128
+#max-num-32
 
 #cull/draw
 #threading-model cull/draw
 
 # used when panda writes text files (unsure what's best here)
-#newline-mode msdos
-newline-mode unix
+newline-mode msdos
+#newline-mode unix
 
 
 # debugging
