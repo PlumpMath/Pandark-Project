@@ -39,17 +39,20 @@ class Builder(object):
 
 		if self.environment['fog']:
 			fog = Fog( 'sceneName' )
-			fog.setColor( self.environment['fog']['color'] ) 
-			fog.setExpDensity( self.environment['fog']['expDensity'] )
-			render.setFog(fog)
+			fog.setColor( self.environment['fog']['color'] )
 
+			if self.environment['fog']['mode'] == "linear":
+				fog.setLinearRange(self.environment['fog']['linearStart']*1000,self.environment['fog']['linearEnd']*1000)
+			else:
+				fog.setExpDensity( self.environment['fog']['expDensity'] )
+
+			render.setFog(fog)
 
 		[self.createNode(props) for props in self.nodes]
 		[self.createLight(props) for props in self.lights]
 		[self.createEntity(props) for props in self.entities]
-		[self.createAnimation(anim) for anim in self.animations]
+		#[self.createAnimation(anim) for anim in self.animations]
 		[self.createStaticGeoms(props) for props in self.staticGeoms]
-
 
 		#[thread.start_new_thread( self.createEntity, (props, ) ) for props in self.entities]
 
@@ -99,12 +102,7 @@ class Builder(object):
 
 		self.__entitiesDict[name] = ent
 
-	def createAnimation(self,entName):
-		animations = self.animations[entName]
-
-		if entName in self.__entitiesDict:
-			#node = self.__entitiesDict[entName].getNode()
-			animsMgr.createAnimation(self.__entitiesDict[entName], animations)
+		animsMgr.createAnimation(ent.getNode(), self.animations[name])
 
 	def createStaticGeoms(self,props):
 		path = props['configFile']

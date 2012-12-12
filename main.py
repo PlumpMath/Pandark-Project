@@ -27,14 +27,27 @@ class Main(ShowBase):
         self.core = Core()
 
         self.core.demand("Menu", "MainMenu")
+
         self.accept('a', self.load)
         self.accept('escape', self.exit)
+        self.accept('f1', self.toggleWireframe)
+        self.accept('f2', self.toggleTexture)
+        self.accept('f3', self.toggleDebug)
 
-        #physicsMgr.debug().show()
+        self.debugNP = physicsMgr.debug()
 
         render.setShaderAuto()
 
         self.run()
+
+    def toggleDebug(self):
+        if self.debugNP.isHidden():
+            #render.setShaderAuto()
+            self.debugNP.show()
+        else:
+            #render.setShaderOff()
+            #render.clearLight()
+            self.debugNP.hide()
 
     def load(self):
         #scene name

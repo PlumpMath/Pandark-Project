@@ -1,6 +1,7 @@
 from game.classes.generic import Generic
-
+from panda3d.core import VBase4
 #from pandark.physics.composer import Composer
+#from panda3d.core import Material
 
 class Static(Generic):
 
@@ -9,9 +10,11 @@ class Static(Generic):
 	def init(self,model,props):
 		Generic.__init__(self,model,props)
 
-	def getSize(self,model):
-		hpr = model.getHpr()
-		model.setHpr(0,0,0)
-		minLimit, maxLimit = model.getTightBounds()
-		model.setHpr(hpr) 
-		return maxLimit - minLimit
+		#myMaterial = Material()		
+		#myMaterial.setAmbient(VBase4(0,0,1,1))
+		#myMaterial.setDiffuse(VBase4(1,0,0,1))
+		#myMaterial.setShininess(5.0)
+		#myMaterial.setSpecular(VBase4(0,0,0,1))
+		#myMaterial.setEmission(VBase4(0,1,0,1))
+		#print myMaterial.getDiffuse(), myMaterial.getSpecular(), myMaterial.getEmission()
+		#model.setMaterial(myMaterial) 

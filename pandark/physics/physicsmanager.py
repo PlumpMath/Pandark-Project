@@ -174,7 +174,7 @@ class PhysicsManager(object):
     def debug(self):
         from panda3d.bullet import BulletDebugNode
         debugNP = render.attachNewNode(BulletDebugNode('Debug') )
-        debugNP.show()
+        #debugNP.show()
         debugNP.node().showWireframe(True)
         debugNP.node().showConstraints(True)
         debugNP.node().showBoundingBoxes(False)

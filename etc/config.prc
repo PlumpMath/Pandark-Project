@@ -48,8 +48,8 @@ audio-volume 1
 # else
 # ----
 aux-display pandagl
-#aux-display pandadx9
-#aux-display pandadx8
+aux-display pandadx9
+aux-display pandadx8
 
 load-display *
 
@@ -57,7 +57,7 @@ load-display *
 display-lists true
 
 # set higher on multicore processors
-loader-num-threads 1
+loader-num-threads 32
 
 # max-num-threads
 #max-num-32
