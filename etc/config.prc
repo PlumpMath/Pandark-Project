@@ -17,7 +17,7 @@ fullscreen false
 # where to look for all models, textures, fonts etc.
 model-path assets/models
 # OS dependent - will be determined by python. change to force
-model-cache-dir xtmp/pandacache
+model-cache-dir tmp/pandacache
 default-model-extension .egg
 
 # graphics
@@ -36,9 +36,6 @@ multisamples 0
 default-far 100000
 # scale textures while loading (lower for more performance)
 texture-scale 1
-azure-bloom-filter false
-azure-cartoon-ink false
-
 
 # audio
 # -----
@@ -48,12 +45,11 @@ audio-music-active true
 audio-sfx-active true
 audio-volume 1
 
-
 # else
 # ----
 aux-display pandagl
-aux-display pandadx9
-aux-display pandadx8
+#aux-display pandadx9
+#aux-display pandadx8
 
 load-display *
 

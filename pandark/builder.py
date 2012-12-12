@@ -4,7 +4,7 @@
 import yaml
 
 import game.classes
-
+from panda3d.core import AmbientLight, Fog
 from panda3d.core import DirectionalLight, PointLight, Spotlight, PerspectiveLens
 
 '''TODO: Separate Class File'''
@@ -23,7 +23,7 @@ class LightManager(object):
 		lens = PerspectiveLens()
 		light.setLens(lens)
 		lens.setFov(1200/props['pos'].z)	
-		light.showFrustum()
+		#light.showFrustum()
 		self.__setLight(light,props)
 
 	def __setPointLight(self,props):
@@ -63,10 +63,11 @@ lightMgr = LightManager()
 
 class Builder(object):
 
-	def __init__(self,nodes,lights,cameras,entities,animations,staticGeoms,yamlList):
+	def __init__(self,environment,nodes,lights,cameras,entities,animations,staticGeoms,yamlList):
 
 		self.reset()
 
+		self.environment = environment
 		self.nodes       = nodes
 		self.lights      = lights
 		self.cameras     = cameras         
@@ -77,24 +78,37 @@ class Builder(object):
 		self.yamlList = yamlList
 
 	def start(self):
+		base.setBackgroundColor( self.environment['colourBackground'] )
+
+		alight = AmbientLight('AmbientLight')
+		alight.setColor(self.environment['colourAmbient'] )
+		alnp = render.attachNewNode(alight)
+		render.setLight(alnp)
+
+		if self.environment['fog']:
+			fog = Fog( 'sceneName' )
+			fog.setColor( self.environment['fog']['color'] ) 
+			fog.setExpDensity( self.environment['fog']['expDensity'] )
+			render.setFog(fog)
+
 		[self.createNode(props) for props in self.nodes]
 		[self.createLight(props) for props in self.lights]
 		[self.createEntity(props) for props in self.entities]
 		[self.createStaticGeoms(props) for props in self.staticGeoms]
 
 		#[thread.start_new_thread( self.createEntity, (props, ) ) for props in self.entities]
-		self.__nodesList    = {}
+		self.__nodesDict    = {}
 
 	def reset(self):		
-		self.__nodesList    = {}
-		self.__lightsList   = {}
-		self.__camerasList  = {}
-		self.__entitiesList = {}
+		self.__nodesDict    = {}
+		self.__lightsDict   = {}
+		self.__camerasDict  = {}
+		self.__entitiesDict = {}
 
-		self.__nodesList[''] = render
+		self.__nodesDict[''] = render
 
 	def getEnt(self,name):		
-		return self.__entitiesList[name]
+		return self.__entitiesDict[name]
 
 	def createLight(self,props):
 		lightMgr.setLight[props['type'] ](props)
@@ -113,11 +127,11 @@ class Builder(object):
 
 		node.reparentTo(parent)
 
-		self.__nodesList[props['name']] = node
+		self.__nodesDict[props['name']] = node
 
 	def createEntity(self,props):
 
-		props['parent'] = self.__nodesList[props['groupName']]
+		props['parent'] = self.__nodesDict[props['groupName']]
 
 		name =  props['name']
 
@@ -127,7 +141,7 @@ class Builder(object):
 
 		ent.init(model,props)
 
-		self.__entitiesList[name] = ent
+		self.__entitiesDict[name] = ent
 
 	def createStaticGeoms(self,props):
 		path = props['configFile']

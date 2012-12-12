@@ -15,12 +15,13 @@ class Loader(object):
         self.reset()
 
     def reset(self):
+        self.environment = {}
         self.nodes       = []
         self.lights      = []
         self.cameras     = []         
         self.entities    = []        
-        self.animations  = {}
-        self.staticGeoms = []
+        self.animations  = {}        
+        self.staticGeoms = []        
         self.configs     = {}
 
         self.modelsLoaded = 0
@@ -36,7 +37,7 @@ class Loader(object):
 
         self.loadScene( sceneName )   
 
-        scene = Builder(self.nodes,self.lights,self.cameras,self.entities,self.animations,self.staticGeoms,self.configs)
+        scene = Builder(self.environment,self.nodes,self.lights,self.cameras,self.entities,self.animations,self.staticGeoms,self.configs)
 
         self.reset()
 
@@ -81,6 +82,24 @@ class Loader(object):
 
     def loadScene(self,sceneName):
         xml = minidom.parse( sceneName )
+
+        if xml.getElementsByTagName('environment'):
+            #Set Colour Background
+            environment = xml.getElementsByTagName('environment')[0]
+            self.environment['colourBackground'] = self.__getColor(environment,'colourBackground')
+            self.environment['colourAmbient']    = self.__getColor(environment,'colourAmbient')
+
+            self.environment['fog'] = {}
+
+            if environment.getElementsByTagName('fog'):
+                fog = environment.getElementsByTagName('fog')[0]
+                mode        = fog.getAttribute('mode')            
+                color       = self.__getColor(fog,'colourDiffuse')
+                linearStart = float(fog.getAttribute('linearStart') or 0) 
+                linearEnd   = float(fog.getAttribute('linearEnd')   or 0)
+                expDensity  = float(fog.getAttribute('expDensity')  or 0)
+
+                self.environment['fog'] = {'mode':mode,'color':color,'linearStart':linearStart,'linearEnd':linearEnd,'expDensity':expDensity}
 
         for xmlNode in xml.getElementsByTagName('staticGeometry'):
             name = xmlNode.getAttribute('name')

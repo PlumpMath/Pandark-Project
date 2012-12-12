@@ -61,7 +61,7 @@ class Core(FSM):
     def mainLoop(self,task):
         #if 'EOF' == self.x.stdout.readline():print '--------------------'
         #print os.path.isfile('ok.txt')
-        self.doPhysics(self.getDt(), 10, 0.008)
+        self.doPhysics(self.getDt(), 10, .008)
         return task.cont      
 
     '''FSM'''
