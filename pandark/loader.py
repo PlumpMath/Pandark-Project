@@ -9,9 +9,9 @@ from builder import Builder
 
 class Loader(object):    
 
-    def __init__(self,callback):
+    def __init__(self,onload):
         self.physics_attrs = ['shapetype','mass','friction','ldamping','adamping','lsleep','asleep','restitution','deactivation','kinematic'] 
-        self.callback = callback
+        self.onload = onload
         self.reset()
 
     def reset(self):
@@ -41,7 +41,7 @@ class Loader(object):
 
         self.reset()
 
-        self.callback(scene)
+        self.onload(scene)
 
     def entitiesSetup(self,entities):
 

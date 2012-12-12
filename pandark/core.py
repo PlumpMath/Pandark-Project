@@ -4,46 +4,55 @@ from menuproxy import MenuProxy
 
 from loader import Loader
 
-import subprocess
+#import subprocess
 
-from direct.stdpy import threading
+#from direct.stdpy import threading
 
 import os
 
 class Core(FSM):
     """knows Menu, Scenario and Loading."""
     def __init__(self):
-        FSM.__init__(self, "Core Game Control")   
-
-        self.doPhysics = physicsMgr.world.doPhysics
-
-        self.getDt = globalClock.getDt
-
+        FSM.__init__(self, "Core Game Control")
         self.loader = Loader(self.onLoad)
 
-    def popen(self, onExit, popenArgs):
-        def runInThread(onExit, popenArgs):
-            proc = subprocess.Popen(popenArgs)
-            proc.wait()
-            onExit()
-            return
-        thread = threading.Thread(target=runInThread, args=(onExit, popenArgs))
-        thread.start()
-        # returns immediately after the thread starts
-        return thread 
+        self.accept('f1', base.toggleWireframe)
+        self.accept('f2', base.toggleTexture)
+        self.accept('f3', self.toggleDebug)
 
-    #Hack mode
-    def popen2(self, callback, popenArgs):
-        subprocess.Popen(popenArgs)
-        def check(task):
-            if os.path.isfile('tmp/.cache'):
-                #os.unlink("cache.txt")
-                callback()                
-                return task.done
-            return task.cont
 
-        taskMgr.add(check,'waiting',sort=10)
-        #print os.path.isfile('ok.txt')
+    def toggleDebug(self):
+        if self.debugNP.isHidden():
+            #render.setShaderAuto()
+            self.debugNP.show()
+        else:
+            #render.setShaderOff()
+            #render.clearLight()
+            self.debugNP.hide()
+
+    # def popen(self, onExit, popenArgs):
+    #     def runInThread(onExit, popenArgs):
+    #         proc = subprocess.Popen(popenArgs)
+    #         proc.wait()
+    #         onExit()
+    #         return
+    #     thread = threading.Thread(target=runInThread, args=(onExit, popenArgs))
+    #     thread.start()
+    #     # returns immediately after the thread starts
+    #     return thread 
+
+    # #Hack mode
+    # def popen2(self, callback, popenArgs):
+    #     subprocess.Popen(popenArgs)
+    #     def check(task):
+    #         if os.path.isfile('tmp/.cache'):
+    #             #os.unlink("cache.txt")
+    #             callback()                
+    #             return task.done
+    #         return task.cont
+
+    #     taskMgr.add(check,'waiting',sort=10)
+    #     #print os.path.isfile('ok.txt')
 
     def onCache(self):
         print '--- Models were cached'
@@ -51,13 +60,21 @@ class Core(FSM):
         #self.m.reparentTo(render)         
 
     def onLoad(self,scene):
+        self.doPhysics = scene.physicsMgr.world.doPhysics
+
+        self.getDt = globalClock.getDt
         #self.popen2(self.onCache, ['ppython', 'load.py'])
+        self.debugNP = scene.physicsMgr.debug()        
 
         self.scene = scene
+
         self.scene.start()
-        taskMgr.add( self.mainLoop, 'mainLoop' )
 
         render.flattenStrong()
+
+        render.setShaderAuto()
+
+        taskMgr.add( self.mainLoop, 'mainLoop' )
 
 
     def mainLoop(self,task):

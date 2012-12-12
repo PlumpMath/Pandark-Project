@@ -1,5 +1,5 @@
 from game.classes.generic import Generic
-from panda3d.core import VBase4
+#from panda3d.core import VBase4
 #from pandark.physics.composer import Composer
 #from panda3d.core import Material
 
@@ -7,8 +7,8 @@ class Static(Generic):
 
 	yaml_tag = u'!Static'
 
-	def init(self,model,props):
-		Generic.__init__(self,model,props)
+	def init(self,model,body,props):
+		Generic.__init__(self,model,body,props)
 
 		#myMaterial = Material()		
 		#myMaterial.setAmbient(VBase4(0,0,1,1))

@@ -3,15 +3,14 @@
 	<enum name="Shapes" type="string">
 		<enumItem name="None" value="none" />
 		<enumItem name="Compound" value="compound" />
-		<enumItem name="MultiCompound" value="multi_compound" />
 		<enumItem name="Box" value="box" />
 		<enumItem name="Sphere" value="sphere" />
 		<enumItem name="Cylinder" value="cylinder" />
 		<enumItem name="Cone" value="cone" />
 		<enumItem name="Capsule" value="capsule" />
 		<enumItem name="Plane" value="plane" />
-		<enumItem name="Triangle Mesh" value="triangle_mesh" />
-		<enumItem name="Convex Hull" value="convex_hull" />
+		<enumItem name="Triangle Mesh" value="trimesh" />
+		<enumItem name="Convex Hull" value="hull" />
 	</enum>
 	
 	<enum name="Classes" type="string">

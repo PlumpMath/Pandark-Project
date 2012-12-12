@@ -147,7 +147,6 @@ class PhysicsManager(object):
         shape = BulletTriangleMeshShape(mesh, dynamic=dynamic )
         body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale) )
 
-
     def __addPlane(self, body, size=(0,0,1), pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
         shape = BulletPlaneShape(Vec3(size), 0)
         body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale)  )
@@ -182,7 +181,6 @@ class PhysicsManager(object):
         self.world.setDebugNode(debugNP.node())
         return debugNP
 
-
     def getSize(self,model):        
         hpr = model.getHpr()
         model.setHpr(0,0,0)
@@ -201,94 +199,11 @@ class PhysicsManager(object):
         shapetype = filter(None,shapetype)
         
         if shapetype[0] in self.addShape.keys():
-            physicsMgr.addShape[shapetype[0]](body,model,pos,hpr,scale)
+            self.addShape[shapetype[0]](body,model,pos,hpr,scale)
 
         not '-' in name or model.remove()
-
 
     def createCompound(self, model, body):
         children = model.find('**/*').getChildren() or model.getChildren()
 
-        [self.setShape(child,body) for child in children]  
-
-
-""" ============================ TEST ============================ """
-
-if __name__ == '__main__':
-
-    from direct.directbase import DirectStart
-
-    base.cam.setPos(0,-100,0)
-
-    base.cam.lookAt(0,0,-10)
-
-    from physicsmanager import PhysicsManager
-
-    physicsMgr = PhysicsManager()
-
-    physicsMgr.debug().show()
-
-    '''Plane'''
-    plane = physicsMgr.createRigidBody('plane', Vec3(0,0,1), pos=(0,0,-20) )
-
-    props = {'mass':10}
-
-    '''Primitive Shapes'''
-    box = physicsMgr.createRigidBody('box', Vec3(3,3,3), props)
-
-    np = render.attachNewNode(box)
-
-    np.setPos(Vec3(20,0,0))
-
-    sphere = physicsMgr.createRigidBody('sphere', Vec3(3,0,0), props)
-
-    np = render.attachNewNode(sphere)
-
-    np.setPos(Vec3(10,0,0))
-
-    cylinder = physicsMgr.createRigidBody('cylinder', Vec3(3,0,10), props)
-
-    np = render.attachNewNode(cylinder)
-
-    np.setPos(Vec3(0,0,0))
-
-    props = {'mass':10,'deactivation':False}
-
-    cone = physicsMgr.createRigidBody('cone', Vec3(3,0,10), props)
-
-    np = render.attachNewNode(cone)
-
-    np.setPos(Vec3(-10,0,0))
-
-    capsule = physicsMgr.createRigidBody('capsule', Vec3(3,0,10), props)
-
-    np = render.attachNewNode(capsule)
-
-    np.setPos(Vec3(-20,0,0))
-
-
-    '''Complex Shapes''' 
-    # model = loader.loadModel('your_model.egg')
-
-    # geom = model.findAllMatches('**/+GeomNode').getPath(0).node().getGeom(0)
-
-    # hull = physicsMgr.createRigidBody('hull', geom, props )
-
-    # np = render.attachNewNode(hull)
-
-    # np.setPos(Vec3(30,0,0))
-
-    # trimesh = physicsMgr.createRigidBody('trimesh', geom, props )
-
-    # np = render.attachNewNode(trimesh)
-
-    # np.setPos(Vec3(-30,0,0))
-
-
-    def task(task):
-        physicsMgr.world.doPhysics(globalClock.getDt())
-        return task.cont
-
-    taskMgr.add(task,'task')
-
-    run()
+        [self.setShape(child,body) for child in children]

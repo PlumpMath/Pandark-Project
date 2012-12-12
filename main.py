@@ -13,12 +13,6 @@ from direct.showbase.ShowBase import ShowBase
 
 from pandark.core import Core
 
-from pandark.physics.physicsmanager import PhysicsManager
-
-import __builtin__
-
-__builtin__.physicsMgr = PhysicsManager()
-
 class Main(ShowBase):
   
     def __init__(self):
@@ -30,24 +24,7 @@ class Main(ShowBase):
 
         self.accept('a', self.load)
         self.accept('escape', self.exit)
-        self.accept('f1', self.toggleWireframe)
-        self.accept('f2', self.toggleTexture)
-        self.accept('f3', self.toggleDebug)
-
-        self.debugNP = physicsMgr.debug()
-
-        #render.setShaderAuto()
-
         self.run()
-
-    def toggleDebug(self):
-        if self.debugNP.isHidden():
-            #render.setShaderAuto()
-            self.debugNP.show()
-        else:
-            #render.setShaderOff()
-            #render.clearLight()
-            self.debugNP.hide()
 
     def load(self):
         #scene name

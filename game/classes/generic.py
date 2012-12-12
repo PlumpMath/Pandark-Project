@@ -4,12 +4,12 @@ class Generic(yaml.YAMLObject):
 
     yaml_tag = u'!Generic'
 
-    def __init__(self,model,props):
+    def __init__(self,model,body,props):
     	self.model  = model
     	self.parent = props['parent']
     	self.pos    = props['pos']
     	self.quat   = props['quat']
-        self._setPhysics()
+        self._setPhysics(body)
 
     def getNode(self):
         return self.model.getParent()
@@ -17,16 +17,14 @@ class Generic(yaml.YAMLObject):
     def command(self,cmd):
         pass
 
-    def _setPhysics(self):
-        body = physicsMgr.createRigidBody(self.physics['shapetype'],self.model,self.physics)
-        
+    def _setPhysics(self,body):
         np = render.attachNewNode(body)
 
         np.setPosQuat(self.pos,self.quat)
 
         self.model.reparentTo(np)
 
-        self._cleanUp()    
+        self._cleanup()
 
     def _getSize(self):
         hpr = self.model.getHpr()
@@ -35,11 +33,11 @@ class Generic(yaml.YAMLObject):
         self.model.setHpr(hpr) 
         return maxLimit - minLimit
 
-    def _cleanUp(self):
+    def _cleanup(self):
     	self.init = None
     	del self.init, self.parent, self.pos, self.quat   
 
     def __del__(self):
-    	self.__cleanUp()    	
+    	self._cleanup()    	
     	self.model.remove()
     	print 0

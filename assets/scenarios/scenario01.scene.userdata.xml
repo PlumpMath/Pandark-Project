@@ -2,21 +2,21 @@
     <Entity __name="Box03">
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
-        <shapetype>compound</shapetype>
-        <mass>5</mass>
+        <shapetype>box</shapetype>
+        <mass>0</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>
         <lsleep>0.8</lsleep>
         <asleep>1</asleep>
         <restitution>0</restitution>
-        <deactivation>true</deactivation>
+        <deactivation>false</deactivation>
         <kinematic>false</kinematic>
     </Entity>
     <Entity __name="Box06">
         <class>!Static</class>
         <model_path>furniture/table01</model_path>
-        <shapetype>compound</shapetype>
+        <shapetype>hull</shapetype>
         <mass>10</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
@@ -30,7 +30,7 @@
     <Entity __name="Box07">
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
-        <shapetype>compound</shapetype>
+        <shapetype>box</shapetype>
         <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
@@ -44,7 +44,7 @@
     <Entity __name="Box08">
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
-        <shapetype>compound</shapetype>
+        <shapetype>box</shapetype>
         <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
@@ -58,7 +58,7 @@
     <Entity __name="Box09">
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
-        <shapetype>compound</shapetype>
+        <shapetype>box</shapetype>
         <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
@@ -72,7 +72,7 @@
     <Entity __name="Box10">
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
-        <shapetype>compound</shapetype>
+        <shapetype>box</shapetype>
         <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
@@ -86,7 +86,7 @@
     <Entity __name="Box11">
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
-        <shapetype>compound</shapetype>
+        <shapetype>box</shapetype>
         <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
@@ -100,7 +100,7 @@
     <Entity __name="Box12">
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
-        <shapetype>compound</shapetype>
+        <shapetype>box</shapetype>
         <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
@@ -114,7 +114,7 @@
     <Entity __name="Box15">
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
-        <shapetype>compound</shapetype>
+        <shapetype>trimesh</shapetype>
         <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
@@ -128,7 +128,7 @@
     <Entity __name="Box16">
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
-        <shapetype>compound</shapetype>
+        <shapetype>box</shapetype>
         <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
@@ -142,7 +142,7 @@
     <Entity __name="Box17">
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
-        <shapetype>compound</shapetype>
+        <shapetype>box</shapetype>
         <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
@@ -156,7 +156,7 @@
     <Entity __name="Box18">
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
-        <shapetype>compound</shapetype>
+        <shapetype>box</shapetype>
         <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
@@ -170,7 +170,7 @@
     <Entity __name="Box19">
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
-        <shapetype>compound</shapetype>
+        <shapetype>trimesh</shapetype>
         <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
@@ -184,7 +184,7 @@
     <Entity __name="Box20">
         <class>!Static</class>
         <model_path>chairs/chair</model_path>
-        <shapetype>compound</shapetype>
+        <shapetype>trimesh</shapetype>
         <mass>5</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
