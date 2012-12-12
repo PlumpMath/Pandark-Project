@@ -17,7 +17,7 @@
         <class>!Static</class>
         <model_path>furniture/table01</model_path>
         <shapetype>compound</shapetype>
-        <mass>0</mass>
+        <mass>10</mass>
         <friction>0.5</friction>
         <ldamping>0</ldamping>
         <adamping>0</adamping>

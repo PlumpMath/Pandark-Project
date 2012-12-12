@@ -1,5 +1,5 @@
 import os
-from pandac.PandaModules import loadPrcFile, loadPrcFileData
+from pandac.PandaModules import loadPrcFile#, loadPrcFileData
 from pandac.PandaModules import Filename
 loadPrcFile(Filename.expandFrom("$MAIN_DIR/etc/config.prc"))
 
@@ -31,14 +31,6 @@ class Main(ShowBase):
         self.accept('escape', self.exit)
 
         #physicsMgr.debug().show()
-
-        #m = loader.loadModel('smiley')
-        #m.reparentTo(render)
-        from panda3d.core import AmbientLight
-        alight = AmbientLight('alight')
-        alight.setColor((0.2, 0.2, 0.2, 1))
-        alnp = render.attachNewNode(alight)
-        render.setLight(alnp)
 
         render.setShaderAuto()
 

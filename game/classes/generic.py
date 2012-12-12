@@ -12,7 +12,7 @@ class Generic(yaml.YAMLObject):
         self._setPhysics()
 
     def getNode(self):
-        return self._np
+        return self.model.getParent()
 
     def command(self,cmd):
         pass

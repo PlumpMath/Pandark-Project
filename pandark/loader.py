@@ -155,7 +155,7 @@ class Loader(object):
                 time        = float(kf.getAttribute('time'))
                 translation = self.__getVec3(kf,'translation')
                 rotation    = self.__getQuat(kf)
-                scale       = self.__getScale(kf)
+                scale       = self.__getVec3(kf,'scale')
                 self.animations[parent][name]['seq'].append((time, translation, rotation, scale))
         
     """ Get Basic Properties of the Elements 
