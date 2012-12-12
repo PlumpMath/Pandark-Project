@@ -8,6 +8,9 @@ from panda3d.core import AmbientLight, Fog
 from pandark.managers.lightsmanager import LightsManager
 lightsMgr = LightsManager()
 
+from pandark.managers.camerasmanager import CamerasManager
+# camerasMgr = CamerasManager()
+
 from pandark.managers.animationsmanager import AnimationsManager
 animsMgr = AnimationsManager()
 
@@ -28,6 +31,8 @@ class Builder(object):
 		self.staticGeoms = staticGeoms
 
 		self.yamlList = yamlList
+
+		self.camerasMgr = CamerasManager()
 
 	def start(self):
 		base.setBackgroundColor( self.environment['colourBackground'] )
@@ -50,8 +55,8 @@ class Builder(object):
 
 		[self.createNode(props) for props in self.nodes]
 		[self.createLight(props) for props in self.lights]
+		[self.createCamera(props) for props in self.cameras]
 		[self.createEntity(props) for props in self.entities]
-		#[self.createAnimation(anim) for anim in self.animations]
 		[self.createStaticGeoms(props) for props in self.staticGeoms]
 
 		#[thread.start_new_thread( self.createEntity, (props, ) ) for props in self.entities]
@@ -86,7 +91,13 @@ class Builder(object):
 		self.__nodesDict[props['name']] = node
 
 	def createLight(self,props):
-		lightsMgr.setLight[props['type'] ](props)
+		light = lightsMgr.createLight[props['type'] ](props)
+		animsMgr.createAnimation(light, self.animations[ props['name'] ] )
+
+	def createCamera(self,props):
+		cam = self.camerasMgr.createCamera(props)
+		self.camerasMgr.active( props['name'] )
+		animsMgr.createAnimation(cam, self.animations[ props['name'] ] )
 
 	def createEntity(self,props):
 

@@ -36,7 +36,7 @@ class Main(ShowBase):
 
         self.debugNP = physicsMgr.debug()
 
-        render.setShaderAuto()
+        #render.setShaderAuto()
 
         self.run()
 

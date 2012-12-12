@@ -4,10 +4,10 @@ class LightsManager(object):
 
 	def __init__(self):
 		self.__lightsDict = {}
-		self.setLight = {}
-		self.setLight['directional'] = self.__setDirectionalLight
-		self.setLight['point']       = self.__setPointLight
-		self.setLight['spot']        = self.__setSpotlight
+		self.createLight = {}
+		self.createLight['directional'] = self.__setDirectionalLight
+		self.createLight['point']       = self.__setPointLight
+		self.createLight['spot']        = self.__setSpotlight
 
 	def __setDirectionalLight(self,props):
 		light = DirectionalLight(props['name'])
@@ -16,7 +16,7 @@ class LightsManager(object):
 		light.setLens(lens)
 		lens.setFov(1200/props['pos'].z)	
 		#light.showFrustum()
-		self.__setLight(light,props)
+		return self.__createLight(light,props)
 
 	def __setPointLight(self,props):
 		#for p in props:print p,props[p]
@@ -25,7 +25,7 @@ class LightsManager(object):
 		#light.showFrustum()	
 		#print light.getPoint()
 		#light.setPoint( Point3(props['pos']) )
-		self.__setLight(light,props)
+		return self.__createLight(light,props)
 
 	def __setSpotlight(self,props):
 		light = Spotlight(props['name'])
@@ -38,17 +38,17 @@ class LightsManager(object):
 		light.setLens(lens)
 		#light.showFrustum()	
 		#print 'exp',light.getExponent()
-		self.__setLight(light,props)
+		return self.__createLight(light,props)
 
-	def __setLight(self,light,props):
+	def __createLight(self,light,props):
 		light.setColor(props['colourDiffuse'])		
 		light.setSpecularColor(props['colourSpecular'])
 		light.setScene(render)
 		node = render.attachNewNode(light)
 		node.setPosQuat(props['pos'], props['quat'] )
 		render.setLight(node)
-
-		self.__lightsDict[props['name'] ] = light
+		self.__lightsDict[props['name'] ] = node
+		return node
 
 	def getLight(self,name):
 		return self.__lightsDict[name]
