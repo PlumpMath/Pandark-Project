@@ -1,26 +1,37 @@
 from panda3d.core import PerspectiveLens
-
+import math
 class CamerasManager(object):
 
 	def __init__(self):
-		self.__camerasDict = {}
 		self.currCam = base.cam
+		self.__camerasDict = {}		
+		self.__camerasDict['default'] = self.currCam
 
 	def getCamera(self,name):
-		return self.__camerasDict[name]
+		if name in self.__camerasDict:return self.__camerasDict[name]
+		print 'Camera not found.'
+		return self.currCam
 
 	def createCamera(self,props):
 		name = props['name']
 
-		np = base.makeCamera(base.win, camName=name )
+		cam = base.makeCamera(base.win, camName=name )
 
-		np.setPosQuat( props['pos'], props['quat'] )
+		cam.setPosQuat( props['pos'], props['quat'] )
 
-		np.node().setActive(0)
+		cam.node().setActive(0)
+
+		lens = cam.node().getLens()
+
+		lens.setNearFar( props['clipping'].x, props['clipping'].y )
+
+		fov = math.degrees( props['fov'] ) 
+
+		lens.setFov(fov*lens.getAspectRatio(), fov)
 		
-		self.__camerasDict[name] = np
+		self.__camerasDict[name] = cam
 
-		return np
+		return cam
 
 	def active(self,camName):
 		cam = self.__camerasDict[camName]

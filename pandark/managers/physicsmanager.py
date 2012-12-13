@@ -26,7 +26,7 @@ class PhysicsManager(object):
         self.world.setGravity(Vec3(gravity) )        
 
         self.addShape = {}
-        self.addShape['plane']    = self.__addPlane
+        self.addShape['plane']    = self.__addTriangleMesh
         self.addShape['sphere']   = self.__addSphere  
         self.addShape['box']      = self.__addBox
         self.addShape['cylinder'] = self.__addCylinder
@@ -34,11 +34,7 @@ class PhysicsManager(object):
         self.addShape['cone']     = self.__addCone
         self.addShape['hull']     = self.__addConvexHull
         self.addShape['trimesh']  = self.__addTriangleMesh
-
-        #self.composer = Composer()
         self.addShape['compound'] = self.__addCompound
-
-       # self.shapesList = self.addShape.keys()
 
     def getRigidBodyDefaultProps(self):
         props = {}
@@ -147,14 +143,14 @@ class PhysicsManager(object):
         shape = BulletTriangleMeshShape(mesh, dynamic=dynamic )
         body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale) )
 
-    def __addPlane(self, body, model, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
-        shape = BulletPlaneShape(Vec3(0, 0, 1), 1)
-        node = BulletRigidBodyNode(model.getName())
-        node.addShape(shape)
-        np = render.attachNewNode(node)
-        np.setPos( pos )
-        model.reparentTo(np)
-        self.world.attachRigidBody(node)
+    # def __addPlane(self, body, model, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
+    #     shape = BulletPlaneShape(Vec3(0, 0, 1), 1)
+    #     node = BulletRigidBodyNode(model.getName())
+    #     node.addShape(shape)
+    #     np = render.attachNewNode(node)
+    #     np.setPos( pos )
+    #     model.reparentTo(np)
+    #     self.world.attachRigidBody(node)
 
     def setBodyProps(self, body, props):        
         body.setMass( props['mass'] )

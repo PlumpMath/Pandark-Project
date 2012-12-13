@@ -127,7 +127,7 @@ class Loader(object):
                 self.lights.append( self.__getLightProps(xmlNode) )
             
             elif xmlNode.getElementsByTagName('camera'): 
-                self.cameras.append( self.__getBasicProps(xmlNode) )
+                self.cameras.append( self.__getCameraProps(xmlNode) )
 
         if xmlNode.getElementsByTagName('animations'): 
             self.__getAnimations(xmlNode.getElementsByTagName('animations')[0])
@@ -156,7 +156,7 @@ class Loader(object):
 
                 t = self.__getVec3(kf,'translation')#Hack to fix 3dsmax Z position: "z/2"
                 translation = Vec3(t.x,t.y,t.z/2)#Hack to fix 3dsmax Z position: "z/2"
-                
+
                 #translation = self.__getVec3(kf,'translation')#No hack
                 rotation    = self.__getQuat(kf)
                 scale       = self.__getVec3(kf,'scale')
@@ -199,7 +199,7 @@ class Loader(object):
 
         '''Light Range'''
         lightRange = light.getElementsByTagName('lightRange')
-        props['range'] = not lightRange or self.__getRange(lightRange[0])
+        props['range'] = not lightRange or self.__getRange(lightRange[0],'outer','inner')
 
         #Hack
         p = props['pos']
@@ -207,10 +207,18 @@ class Loader(object):
 
         return props
 
-    def __getRange(self,xmlNode):        
-        inner = float(xmlNode.getAttribute('inner') )
-        outer = float(xmlNode.getAttribute('outer') )
-        return Vec2(outer, inner)
+    def __getCameraProps(self,xmlNode):
+        '''Camera'''
+        props = self.__getBasicProps(xmlNode)
+        cam   = xmlNode.getElementsByTagName('camera')[0]
+        props['fov'] = float(cam.getAttribute('fov') )       
+        props['clipping'] = self.__getRange(cam.getElementsByTagName('clipping')[0],'near','far')
+        return props
+
+    def __getRange(self,xmlNode,start,end):        
+        start = float(xmlNode.getAttribute(start) )
+        end   = float(xmlNode.getAttribute(end) )
+        return Vec2(start, end)
 
     def __getVec3(self,xmlNode,tag):
         '''Vec3'''

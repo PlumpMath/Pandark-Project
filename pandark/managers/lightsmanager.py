@@ -1,4 +1,5 @@
 from panda3d.core import DirectionalLight, PointLight, Spotlight, PerspectiveLens
+import math
 
 class LightsManager(object):
 
@@ -32,8 +33,9 @@ class LightsManager(object):
 		light.setShadowCaster(props['castShadows'],2048,2048)
 		light.setAttenuation(props['attenuation'])		
 		lens = PerspectiveLens()
-		lrange = props['range'] / 0.0174533 #to fix Ogremax values
-		lens.setFov(lrange.x)
+
+		fov = math.degrees( props['range'].x )		
+		lens.setFov(fov)
 		lens.setFilmSize(5096); 
 		light.setLens(lens)
 		#light.showFrustum()	

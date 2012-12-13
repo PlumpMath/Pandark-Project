@@ -283,9 +283,9 @@
             <position x="0.000700593" y="-23.1307" z="1.84297" />
             <scale x="1" y="1" z="1" />
             <rotation qx="0" qy="0" qz="0" qw="1" />
-            <camera name="Camera01" fov="0.602416">
+            <camera name="Camera01" fov="0.967138">
                 <rotation qx="0" qy="0" qz="0" qw="1" />
-                <clipping near="1" far="1000" />
+                <clipping near="0.01" far="1000" />
             </camera>
             <animations>
                 <animation name="Camera01_idle" enable="true" loop="true" interpolationMode="linear" rotationInterpolationMode="linear" length="3.33333">
