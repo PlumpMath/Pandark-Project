@@ -18,7 +18,7 @@
                 </subentities>
             </entity>
             <animations>
-                <animation name="Box03_idle" enable="true" loop="true" interpolationMode="linear" rotationInterpolationMode="linear" length="3.33333">
+                <animation name="Box03_idle2" enable="true" loop="true" interpolationMode="linear" rotationInterpolationMode="linear" length="3.33333">
                     <keyframe time="0">
                         <translation x="-4.5989e-007" y="-7.30331" z="2.4" />
                         <rotation qx="0" qy="0" qz="1" qw="-7.54979e-008" />
@@ -208,7 +208,7 @@
             </entity>
         </node>
         <node name="Box19">
-            <position x="-0.0567307" y="-1.85676" z="2.4" />
+            <position x="0.467435" y="-1.85676" z="2.4" />
             <scale x="1" y="1" z="1" />
             <rotation qx="0" qy="0" qz="0" qw="1" />
             <entity name="Box19" castShadows="true" receiveShadows="true" meshFile="Box19.mesh">
@@ -236,85 +236,6 @@
                     <subentity index="0" materialName="07-Default" />
                 </subentities>
             </entity>
-            <animations>
-                <animation name="Box01_idle" enable="false" loop="false" interpolationMode="linear" rotationInterpolationMode="linear" length="3.33333">
-                    <keyframe time="0">
-                        <translation x="0" y="0" z="-0.3" />
-                        <rotation qx="0" qy="0" qz="0" qw="1" />
-                        <scale x="1" y="1" z="1" />
-                    </keyframe>
-                    <keyframe time="0.238095">
-                        <translation x="0" y="1.50431e-008" z="-0.644146" />
-                        <rotation qx="0" qy="0" qz="0" qw="1" />
-                        <scale x="1" y="1" z="1" />
-                    </keyframe>
-                    <keyframe time="0.47619">
-                        <translation x="0" y="5.38853e-008" z="-1.53275" />
-                        <rotation qx="0" qy="0" qz="0" qw="1" />
-                        <scale x="1" y="1" z="1" />
-                    </keyframe>
-                    <keyframe time="0.714286">
-                        <translation x="0" y="1.07009e-007" z="-2.74807" />
-                        <rotation qx="0" qy="0" qz="0" qw="1" />
-                        <scale x="1" y="1" z="1" />
-                    </keyframe>
-                    <keyframe time="0.952381">
-                        <translation x="0" y="1.64895e-007" z="-4.07236" />
-                        <rotation qx="0" qy="0" qz="0" qw="1" />
-                        <scale x="1" y="1" z="1" />
-                    </keyframe>
-                    <keyframe time="1.19048">
-                        <translation x="0" y="2.18027e-007" z="-5.28787" />
-                        <rotation qx="0" qy="0" qz="0" qw="1" />
-                        <scale x="1" y="1" z="1" />
-                    </keyframe>
-                    <keyframe time="1.42857">
-                        <translation x="0" y="2.56886e-007" z="-6.17686" />
-                        <rotation qx="0" qy="0" qz="0" qw="1" />
-                        <scale x="1" y="1" z="1" />
-                    </keyframe>
-                    <keyframe time="1.66667">
-                        <translation x="0" y="2.71954e-007" z="-6.52157" />
-                        <rotation qx="0" qy="0" qz="0" qw="1" />
-                        <scale x="1" y="1" z="1" />
-                    </keyframe>
-                    <keyframe time="1.90476">
-                        <translation x="0" y="2.71954e-007" z="-6.17743" />
-                        <rotation qx="0" qy="0" qz="0" qw="1" />
-                        <scale x="1" y="1" z="1" />
-                    </keyframe>
-                    <keyframe time="2.14286">
-                        <translation x="0" y="2.71954e-007" z="-5.28882" />
-                        <rotation qx="0" qy="0" qz="0" qw="1" />
-                        <scale x="1" y="1" z="1" />
-                    </keyframe>
-                    <keyframe time="2.38095">
-                        <translation x="0" y="2.71954e-007" z="-4.0735" />
-                        <rotation qx="0" qy="0" qz="0" qw="1" />
-                        <scale x="1" y="1" z="1" />
-                    </keyframe>
-                    <keyframe time="2.61905">
-                        <translation x="0" y="2.71954e-007" z="-2.74921" />
-                        <rotation qx="0" qy="0" qz="0" qw="1" />
-                        <scale x="1" y="1" z="1" />
-                    </keyframe>
-                    <keyframe time="2.85714">
-                        <translation x="0" y="2.71954e-007" z="-1.5337" />
-                        <rotation qx="0" qy="0" qz="0" qw="1" />
-                        <scale x="1" y="1" z="1" />
-                    </keyframe>
-                    <keyframe time="3.09524">
-                        <translation x="0" y="2.71954e-007" z="-0.644717" />
-                        <rotation qx="0" qy="0" qz="0" qw="1" />
-                        <scale x="1" y="1" z="1" />
-                    </keyframe>
-                    <keyframe time="3.33333">
-                        <translation x="0" y="2.71954e-007" z="-0.3" />
-                        <rotation qx="0" qy="0" qz="0" qw="1" />
-                        <scale x="1" y="1" z="1" />
-                    </keyframe>
-                </animation>
-            </animations>
         </node>
         <node name="Box21">
             <position x="0.0830383" y="7.71944" z="24.7268" />
@@ -357,6 +278,94 @@
                 <lightAttenuation range="204" constant="1" linear="0" quadric="0" />
                 <lightRange inner="0.757473" outer="0.93026" />
             </light>
+        </node>
+        <node name="Camera01">
+            <position x="0.000700593" y="-23.1307" z="1.84297" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <camera name="Camera01" fov="0.602416">
+                <rotation qx="0" qy="0" qz="0" qw="1" />
+                <clipping near="1" far="1000" />
+            </camera>
+            <animations>
+                <animation name="Camera01_idle" enable="true" loop="true" interpolationMode="linear" rotationInterpolationMode="linear" length="3.33333">
+                    <keyframe time="0">
+                        <translation x="0.000700593" y="-23.1307" z="1.84297" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <scale x="1" y="1" z="1" />
+                    </keyframe>
+                    <keyframe time="0.238095">
+                        <translation x="0.00070062" y="-22.5074" z="1.84297" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <scale x="1" y="1" z="1" />
+                    </keyframe>
+                    <keyframe time="0.47619">
+                        <translation x="0.000700697" y="-20.7603" z="1.84297" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <scale x="1" y="1" z="1" />
+                    </keyframe>
+                    <keyframe time="0.714286">
+                        <translation x="0.000700814" y="-18.0766" z="1.84297" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <scale x="1" y="1" z="1" />
+                    </keyframe>
+                    <keyframe time="0.952381">
+                        <translation x="0.000700964" y="-14.6436" z="1.84297" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <scale x="1" y="1" z="1" />
+                    </keyframe>
+                    <keyframe time="1.19048">
+                        <translation x="0.000701139" y="-10.6487" z="1.84297" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <scale x="1" y="1" z="1" />
+                    </keyframe>
+                    <keyframe time="1.42857">
+                        <translation x="0.00070133" y="-6.27909" z="1.84297" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <scale x="1" y="1" z="1" />
+                    </keyframe>
+                    <keyframe time="1.66667">
+                        <translation x="0.000701529" y="-1.72622" z="1.84297" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <scale x="1" y="1" z="1" />
+                    </keyframe>
+                    <keyframe time="1.90476">
+                        <translation x="0.000701728" y="2.83074" z="1.84297" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <scale x="1" y="1" z="1" />
+                    </keyframe>
+                    <keyframe time="2.14286">
+                        <translation x="0.000701919" y="7.20056" z="1.84297" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <scale x="1" y="1" z="1" />
+                    </keyframe>
+                    <keyframe time="2.38095">
+                        <translation x="0.000702093" y="11.1959" z="1.84297" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <scale x="1" y="1" z="1" />
+                    </keyframe>
+                    <keyframe time="2.61905">
+                        <translation x="0.000702244" y="14.6295" z="1.84297" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <scale x="1" y="1" z="1" />
+                    </keyframe>
+                    <keyframe time="2.85714">
+                        <translation x="0.000702361" y="17.3139" z="1.84297" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <scale x="1" y="1" z="1" />
+                    </keyframe>
+                    <keyframe time="3.09524">
+                        <translation x="0.000702437" y="19.062" z="1.84297" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <scale x="1" y="1" z="1" />
+                    </keyframe>
+                    <keyframe time="3.33333">
+                        <translation x="0.000702465" y="19.6863" z="1.84297" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <scale x="1" y="1" z="1" />
+                    </keyframe>
+                </animation>
+            </animations>
         </node>
     </nodes>
 </scene>

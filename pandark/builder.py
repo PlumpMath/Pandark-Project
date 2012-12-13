@@ -75,6 +75,9 @@ class Builder(object):
 		[self.createEntity(props) for props in self.entities]
 		[self.createStaticGeoms(props) for props in self.staticGeoms]
 
+
+		#self.animsMgr.play('Camera01', 'idle', True) 
+
 	def reset(self):		
 		self.__nodesDict    = {}
 		self.__lightsDict   = {}

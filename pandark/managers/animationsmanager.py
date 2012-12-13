@@ -5,21 +5,22 @@ class AnimationsManager(object):
 	def __init__(self):
 		self.__animationsDict = {}
 		self.__sequences  = {}
-		self.__animations = {}
+		self.__animations = []
 
 	def getAnimation(self,name):
-		return self.__animationsDict[name]
+		return self.__sequences[name]
 
-	def createAnimation(self,node,animations):
-		entName = node.getName()
-		self.__sequences[entName] = {}
+	def createAnimation(self,node,animations):		
 		if animations:
+			entName = node.getName()
+			self.__sequences[entName] = {}
 			for anim in animations:
-				self.__sequences[entName][anim] = Sequence()								
+				seq = Sequence(name=entName)								
 				prevTime = 0
 				for val in animations[anim]['seq']:
-					self.__sequences[entName][anim].append( node.posQuatScaleInterval(val[0]-prevTime,val[1],val[2],val[3]) )
-					prevTime = val[0]					
+					seq.append( node.posQuatScaleInterval(val[0]-prevTime,val[1],val[2],val[3]) )
+					prevTime = val[0]
+				self.__sequences[entName][anim] = seq					
 				if animations[anim]['enable']:
 					self.play(entName, anim, animations[anim]['loop'])
 

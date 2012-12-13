@@ -153,7 +153,11 @@ class Loader(object):
 
             for kf in keyframes:
                 time        = float(kf.getAttribute('time'))
-                translation = self.__getVec3(kf,'translation')
+
+                t = self.__getVec3(kf,'translation')#Hack to fix 3dsmax Z position: "z/2"
+                translation = Vec3(t.x,t.y,t.z/2)#Hack to fix 3dsmax Z position: "z/2"
+                
+                #translation = self.__getVec3(kf,'translation')#No hack
                 rotation    = self.__getQuat(kf)
                 scale       = self.__getVec3(kf,'scale')
                 self.animations[parent][name]['seq'].append((time, translation, rotation, scale))
@@ -168,7 +172,7 @@ class Loader(object):
         props['pos']       = self.__getPos(xmlNode)
         props['quat']      = self.__getQuat(xmlNode)
         props['scale']     = self.__getVec3(xmlNode,'scale')
-        props['groupName'] = xmlNode.parentNode.getAttribute('name') #or 'render'
+        props['groupName'] = xmlNode.parentNode.getAttribute('name')
 
         self.animations[props['name']] = None
 
@@ -198,8 +202,8 @@ class Loader(object):
         props['range'] = not lightRange or self.__getRange(lightRange[0])
 
         #Hack
-        pos = props['pos']
-        props['pos'] = Vec3(pos.x,pos.y,pos.z*2)
+        p = props['pos']
+        props['pos'] = Vec3(p.x,p.y,p.z*2)
 
         return props
 
@@ -221,7 +225,7 @@ class Loader(object):
         vec3 = xmlNode.getElementsByTagName('position')[0]            
         x = float( vec3.getAttribute('x') )
         y = float( vec3.getAttribute('y') )
-        z = float( vec3.getAttribute('z') ) / 2
+        z = float( vec3.getAttribute('z') ) / 2 #Hack to fix 3dsmax Z position: "z/2"
         return Vec3(x,y,z)
     
     def __getQuat(self,xmlNode):

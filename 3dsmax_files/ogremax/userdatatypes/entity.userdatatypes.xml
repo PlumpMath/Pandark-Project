@@ -8,7 +8,7 @@
 		<enumItem name="Cylinder" value="cylinder" />
 		<enumItem name="Cone" value="cone" />
 		<enumItem name="Capsule" value="capsule" />
-		<enumItem name="Plane" value="plane" />
+		<!--<enumItem name="Plane" value="plane" />-->
 		<enumItem name="Triangle Mesh" value="trimesh" />
 		<enumItem name="Convex Hull" value="hull" />
 	</enum>

@@ -147,9 +147,14 @@ class PhysicsManager(object):
         shape = BulletTriangleMeshShape(mesh, dynamic=dynamic )
         body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale) )
 
-    def __addPlane(self, body, size=(0,0,1), pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
-        shape = BulletPlaneShape(Vec3(size), 0)
-        body.addShape( shape, TransformState.makePosHprScale(pos,hpr,scale)  )
+    def __addPlane(self, body, model, pos=(0,0,0), hpr=(0,0,0), scale=(1,1,1) ):
+        shape = BulletPlaneShape(Vec3(0, 0, 1), 1)
+        node = BulletRigidBodyNode(model.getName())
+        node.addShape(shape)
+        np = render.attachNewNode(node)
+        np.setPos( pos )
+        model.reparentTo(np)
+        self.world.attachRigidBody(node)
 
     def setBodyProps(self, body, props):        
         body.setMass( props['mass'] )

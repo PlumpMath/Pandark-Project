@@ -10,7 +10,7 @@
         <lsleep>0.8</lsleep>
         <asleep>1</asleep>
         <restitution>0</restitution>
-        <deactivation>false</deactivation>
+        <deactivation>true</deactivation>
         <kinematic>false</kinematic>
     </Entity>
     <Entity __name="Box06">
