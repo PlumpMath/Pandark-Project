@@ -5,7 +5,7 @@
 
 from panda3d.core import Vec2, Vec3, Vec4, Quat
 from xml.dom import minidom
-from builder import Builder
+from scenario import Scenario
 
 class Loader(object):    
 
@@ -37,7 +37,7 @@ class Loader(object):
 
         self.loadScene( sceneName )   
 
-        scene = Builder(self.environment,self.nodes,self.lights,self.cameras,self.entities,self.animations,self.staticGeoms,self.configs)
+        scene = Scenario(self.environment,self.nodes,self.lights,self.cameras,self.entities,self.animations,self.staticGeoms,self.configs)
 
         self.reset()
 
@@ -258,8 +258,7 @@ class Loader(object):
         near     = float( clipping.getAttribute('near') ) 
         far      = float( clipping.getAttribute('far') )
         
-        if near == .0:
-            near = 1
+        #if near == .0: near = 1
         
         return near, far 
 

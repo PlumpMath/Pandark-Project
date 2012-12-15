@@ -3,9 +3,15 @@ from direct.interval.IntervalGlobal import *
 class AnimationsManager(object):
 
 	def __init__(self):
+		self.reset()
+
+	def reset(self):
 		self.__animationsDict = {}
 		self.__sequences  = {}
 		self.__animations = []
+
+		self.play = True
+
 
 	def getAnimation(self,name):
 		return self.__sequences[name]
@@ -22,10 +28,32 @@ class AnimationsManager(object):
 					prevTime = val[0]
 				self.__sequences[entName][anim] = seq					
 				if animations[anim]['enable']:
-					self.play(entName, anim, animations[anim]['loop'])
+					self.playAnim(entName, anim, animations[anim]['loop'])
 
-	def play(self,entName, aniName, loop=False):
+	def playAnim(self,entName, aniName, loop=False):
 		if loop:
 			self.__sequences[entName][aniName].loop()
 		else:
 			self.__sequences[entName][aniName].start()
+
+	def destroy(self):
+		ivals=ivalMgr.getIntervalsMatching('*')
+		for i in ivals: 
+			i.finish()
+		self.reset()
+
+	def togglePlay(self):
+		self.play = not self.play
+		if self.play:
+			taskMgr.add(self.update, 'update')
+			print self.ivals
+			for i in self.ivals: 
+				i.resume()
+		else:
+			taskMgr.remove('update')
+			ivals=ivalMgr.getIntervalsMatching('*')
+			self.ivals = []
+			for i in ivals: 
+				self.ivals.append(i)
+				i.pause()
+

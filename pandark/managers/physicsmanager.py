@@ -36,6 +36,10 @@ class PhysicsManager(object):
         self.addShape['trimesh']  = self.__addTriangleMesh
         self.addShape['compound'] = self.__addCompound
 
+    def __clearup(self):
+        import sys
+        del sys.modules["panda3d.bullet"]
+
     def getRigidBodyDefaultProps(self):
         props = {}
         props['mass']         = .0
@@ -208,3 +212,10 @@ class PhysicsManager(object):
         children = model.find('**/*').getChildren() or model.getChildren()
 
         [self.setShape(child,body) for child in children]
+
+    def destroy(self):
+        rbs = self.world.getRigidBodies()
+        for body in rbs:
+            self.world.removeRigidBody(body)
+            print 'Removing rigidbody'
+        #del self.world

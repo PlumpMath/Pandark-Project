@@ -1,11 +1,12 @@
 from panda3d.core import PerspectiveLens
 import math
+
 class CamerasManager(object):
 
 	def __init__(self):
 		self.currCam = base.cam
 		self.__camerasDict = {}		
-		self.__camerasDict['default'] = self.currCam
+		self.__camerasDict['default'] = base.cam
 
 	def getCamera(self,name):
 		if name in self.__camerasDict:return self.__camerasDict[name]
@@ -38,3 +39,12 @@ class CamerasManager(object):
 		cam.node().setActive(1)
 		self.currCam.node().setActive(0)
 		self.currCam = cam
+
+	def destroy(self):		
+		for cam in self.__camerasDict:
+			if cam != 'default':
+				print 'removing cam', cam
+				self.__camerasDict[cam].remove()
+		base.cam.node().setActive(1)
+		self.__camerasDict = {}
+		self.__camerasDict['default'] = base.cam

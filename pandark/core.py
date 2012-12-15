@@ -4,22 +4,15 @@ from menuproxy import MenuProxy
 
 from loader import Loader
 
-#import subprocess
+#import os, subprocess
 
 #from direct.stdpy import threading
-
-import os
 
 class Core(FSM):
     """knows Menu, Scenario and Loading."""
     def __init__(self):
         FSM.__init__(self, "Core Game Control")
-        self.loader = Loader(self.onLoad)
-
-        self.accept('f1', base.toggleWireframe)
-        self.accept('f2', base.toggleTexture)
-        self.accept('f3', self.toggleDebug)
-
+        self.loader = Loader(self.enterScenario)
 
     def toggleDebug(self):
         if self.debugNP.isHidden():
@@ -39,47 +32,9 @@ class Core(FSM):
     #     thread = threading.Thread(target=runInThread, args=(onExit, popenArgs))
     #     thread.start()
     #     # returns immediately after the thread starts
-    #     return thread 
-
-    # #Hack mode
-    # def popen2(self, callback, popenArgs):
-    #     subprocess.Popen(popenArgs)
-    #     def check(task):
-    #         if os.path.isfile('tmp/.cache'):
-    #             #os.unlink("cache.txt")
-    #             callback()                
-    #             return task.done
-    #         return task.cont
-
-    #     taskMgr.add(check,'waiting',sort=10)
-    #     #print os.path.isfile('ok.txt')
-
-    def onCache(self):
-        print '--- Models were cached'
-        #self.m=loader.loadModel('game/assets/models/humans/rachel') 
-        #self.m.reparentTo(render)         
-
-    def onLoad(self,scene):
-        self.doPhysics = scene.physicsMgr.world.doPhysics
-
-        self.getDt = globalClock.getDt
-        #self.popen2(self.onCache, ['ppython', 'load.py'])
-        self.debugNP = scene.physicsMgr.debug()        
-
-        self.scene = scene
-
-        self.scene.start()
-
-        render.flattenStrong()
-
-        render.setShaderAuto()
-
-        taskMgr.add( self.mainLoop, 'mainLoop' )
-
+    #     return thread
 
     def mainLoop(self,task):
-        #if 'EOF' == self.x.stdout.readline():print '--------------------'
-        #print os.path.isfile('ok.txt')
         dt = self.getDt()
         self.doPhysics(dt)
         return task.cont      
@@ -89,19 +44,6 @@ class Core(FSM):
     def enterLoading(self, scenario):
         print 'Loading', scenario
         self.loader.preload(scenario)
-        
-        # TODO: put this into gui package and add a black background
-        # self.loading = OnscreenText(text="LOADING", pos=(0,0), scale=0.1,
-        #                        align=TextNode.ACenter, fg=(1,1,1,1))
-        # self.preloader = scenarioPreloader(scenario)
-        # base.graphicsEngine.renderFrame()
-        # base.graphicsEngine.renderFrame()
-        # self.preloader.preloadFast()  # depends on the loading screen
-        # # Other preloader methods would specify a callback that calls
-        # # self.demand(scenario), but preloadFast() is executed in one frame, so
-        # # we can safely demand that from here. Interactive loading screens
-        # # might require special handling.
-        # self.demand("Scenario", scenario)
 
     def exitLoading(self):
         pass
@@ -109,15 +51,50 @@ class Core(FSM):
         # del self.loading
         # del self.preloader
 
-    def enterScenario(self, scenario):
-        pass
-        # self.scenario = ScenarioProxy(scenario)
-        # self.scenario.begin()
+    def enterScenario(self, scene):
+        self.scene = scene
+        print 'Enter Scenario'
+
+        self.doPhysics = scene.physicsMgr.world.doPhysics
+
+        self.getDt = globalClock.getDt
+        
+        self.debugNP = scene.physicsMgr.debug()        
+
+        self.scene = scene
+
+        #self.scene.sceneNode.setShaderAuto()
+
+        self.scene.begin()
+
+        #self.scene.clearModelNodes() 
+
+        #self.scene.flattenStrong()        
+
+        self.mainLoop = taskMgr.add( self.mainLoop, 'mainLoop' )
+
+        self.accept('f1', base.toggleWireframe)
+        self.accept('f2', base.toggleTexture)
+        self.accept('f3', self.toggleDebug)
+        self.accept('r', self.clearScene)
+
+    def clearScene(self):
+        self.debugNP.hide()
+        taskMgr.remove( self.mainLoop )
+        del self.mainLoop
+        self.scene.destroy()
+        del self.scene
+        del self.doPhysics
+        del self.getDt
+        del self.debugNP
+        self.demand("Loading", 'scenario01')
 
     def exitScenario(self):
         pass
-        # self.scenario.destroy()
-        # del self.scenario
+        # for child in render.getChildren(): 
+        #     #if child != base.camera:
+        #     print child, 'removed'
+        #     child.removeNode()
 
     def enterMenu(self, menu, *args):
         self.menu = MenuProxy(menu, *args)

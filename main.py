@@ -24,20 +24,39 @@ class Main(ShowBase):
 
         self.accept('a', self.load)
         self.accept('escape', self.exit)
+
+        self.__clearup()
+        
         self.run()
 
     def load(self):
         #scene name
         sceneName = "scenario01"
         self.core.demand("Loading", sceneName)
+        
 
     def exit(self):
+        base.graphicsEngine.removeAllWindows()
+        ShowBase.destroy(self)
         os._exit(0)
+
+    def __clearup(self):
+        import sys
+        ShowBase, psyco = None, None
+        del ShowBase, psyco
+        del sys.modules["psyco"]
+        del sys.modules["direct.showbase.ShowBase"]
+
+
+
+
+
 
 try:
     import psyco
-    psyco.full()
+    psyco.full()    
 except ImportError:
     print 'Psyco is not installed.'
+
 
 Main()

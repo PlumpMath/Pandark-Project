@@ -6,25 +6,14 @@ class Generic(yaml.YAMLObject):
 
     def __init__(self,model,body,props):
     	self.model  = model
-    	self.parent = props['parent']
     	self.pos    = props['pos']
     	self.quat   = props['quat']
-        self._setPhysics(body)
 
     def getNode(self):
         return self.model.getParent()
 
     def command(self,cmd):
         pass
-
-    def _setPhysics(self,body):
-        np = render.attachNewNode(body)
-
-        np.setPosQuat(self.pos,self.quat)
-
-        self.model.reparentTo(np)
-
-        self._cleanup()
 
     def _getSize(self):
         hpr = self.model.getHpr()
@@ -34,10 +23,9 @@ class Generic(yaml.YAMLObject):
         return maxLimit - minLimit
 
     def _cleanup(self):
-    	self.init = None
-    	del self.init, self.parent, self.pos, self.quat   
+        print 'removing model', self.model
+        self.model.remove()
+        del self.model
 
     def __del__(self):
-    	self._cleanup()    	
-    	self.model.remove()
-    	print 0
+    	self._cleanup()

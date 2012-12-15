@@ -43,14 +43,25 @@ class LightsManager(object):
 		return self.__createLight(light,props)
 
 	def __createLight(self,light,props):
+		print props['groupName']
 		light.setColor(props['colourDiffuse'])		
 		light.setSpecularColor(props['colourSpecular'])
-		light.setScene(render)
-		node = render.attachNewNode(light)
+		#light.setScene(render)
+		node = hidden.attachNewNode(light)
 		node.setPosQuat(props['pos'], props['quat'] )
-		render.setLight(node)
+		#render.setLight(node)
 		self.__lightsDict[props['name'] ] = node
 		return node
 
 	def getLight(self,name):
 		return self.__lightsDict[name]
+
+	def destroy(self):
+		for light in self.__lightsDict:
+			self.__lightsDict[light].node().setShadowCaster(False)
+			self.__lightsDict[light].getParent().clearLight(self.__lightsDict[light])
+			self.__lightsDict[light].remove()
+		self.__lightsDict = {}
+
+	def __del__(self):
+		self.destroy()
