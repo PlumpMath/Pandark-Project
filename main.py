@@ -1,13 +1,13 @@
-import os
-from pandac.PandaModules import loadPrcFile#, loadPrcFileData
+import os, multiprocessing
+from pandac.PandaModules import loadPrcFile, loadPrcFileData
 from pandac.PandaModules import Filename
 loadPrcFile(Filename.expandFrom("$MAIN_DIR/etc/config.prc"))
 
-# coresNum =  int( os.environ["NUMBER_OF_PROCESSORS"] )
+coresNum =  multiprocessing.cpu_count() #int( os.environ["NUMBER_OF_PROCESSORS"] )
 
-# threadsNum = str(pow(coresNum,3) )
-
-# loadPrcFileData('', 'loader-num-threads ' + threadsNum ) 
+if coresNum > 1:
+    threadsNum = str(pow(coresNum,3) )
+    loadPrcFileData('', 'loader-num-threads ' + threadsNum )
 
 from direct.showbase.ShowBase import ShowBase
 
@@ -25,32 +25,17 @@ class Main(ShowBase):
         self.accept('a', self.load)
         self.accept('escape', self.exit)
 
-        self.__clearup()
-        
         self.run()
 
     def load(self):
         #scene name
         sceneName = "scenario01"
         self.core.demand("Loading", sceneName)
-        
 
     def exit(self):
         base.graphicsEngine.removeAllWindows()
         ShowBase.destroy(self)
         os._exit(0)
-
-    def __clearup(self):
-        import sys
-        ShowBase, psyco = None, None
-        del ShowBase, psyco
-        del sys.modules["psyco"]
-        del sys.modules["direct.showbase.ShowBase"]
-
-
-
-
-
 
 try:
     import psyco

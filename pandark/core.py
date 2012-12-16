@@ -14,13 +14,15 @@ class Core(FSM):
         FSM.__init__(self, "Core Game Control")
         self.loader = Loader(self.enterScenario)
 
+        self.accept('f1', base.toggleWireframe)
+        self.accept('f2', base.toggleTexture)
+        self.accept('f3', self.toggleDebug)
+        self.accept('r', self.clearScene)
+
     def toggleDebug(self):
         if self.debugNP.isHidden():
-            #render.setShaderAuto()
             self.debugNP.show()
         else:
-            #render.setShaderOff()
-            #render.clearLight()
             self.debugNP.hide()
 
     # def popen(self, onExit, popenArgs):
@@ -58,35 +60,23 @@ class Core(FSM):
         self.doPhysics = scene.physicsMgr.world.doPhysics
 
         self.getDt = globalClock.getDt
-        
+
         self.debugNP = scene.physicsMgr.debug()        
 
         self.scene = scene
 
-        #self.scene.sceneNode.setShaderAuto()
-
-        self.scene.begin()
-
-        #self.scene.clearModelNodes() 
-
-        #self.scene.flattenStrong()        
+        self.scene.begin()        
 
         self.mainLoop = taskMgr.add( self.mainLoop, 'mainLoop' )
-
-        self.accept('f1', base.toggleWireframe)
-        self.accept('f2', base.toggleTexture)
-        self.accept('f3', self.toggleDebug)
-        self.accept('r', self.clearScene)
 
     def clearScene(self):
         self.debugNP.hide()
         taskMgr.remove( self.mainLoop )
         del self.mainLoop
-        self.scene.destroy()
         del self.scene
-        del self.doPhysics
-        del self.getDt
+        self.debugNP.remove()
         del self.debugNP
+        
         self.demand("Loading", 'scenario01')
 
     def exitScenario(self):

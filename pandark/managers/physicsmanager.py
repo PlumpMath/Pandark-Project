@@ -16,10 +16,7 @@ from panda3d.bullet import ZUp
 
 import re
 
-class PhysicsManager(object):
-
-    num_rigidBodies = 0
-    num_ghosts      = 0
+class PhysicsManager(object):    
 
     def __init__(self, gravity=(0,0,-9.81) ):
         self.world = BulletWorld()
@@ -36,9 +33,8 @@ class PhysicsManager(object):
         self.addShape['trimesh']  = self.__addTriangleMesh
         self.addShape['compound'] = self.__addCompound
 
-    def __clearup(self):
-        import sys
-        del sys.modules["panda3d.bullet"]
+        self.num_rigidBodies = 0
+        self.num_ghosts      = 0
 
     def getRigidBodyDefaultProps(self):
         props = {}
@@ -54,8 +50,8 @@ class PhysicsManager(object):
         return props
 
     def getRigidBody(self, name=None):
-        PhysicsManager.num_rigidBodies+=1
-        return BulletRigidBodyNode(name or 'rigidbody'+str(PhysicsManager.num_rigidBodies) )
+        self.num_rigidBodies+=1
+        return BulletRigidBodyNode(name or 'rigidbody'+str(self.num_rigidBodies) )
 
     def createRigidBody(self, shapetype, model, props={}, name=None):
         body = self.getRigidBody(name)
@@ -66,8 +62,8 @@ class PhysicsManager(object):
         return body         
 
     def getGhost(self, name=None):
-        PhysicsManager.num_ghosts+=1
-        return BulletGhostNode(name or 'ghost'+str(PhysicsManager.num_ghosts) )
+        self.num_ghosts+=1
+        return BulletGhostNode(name or 'ghost'+str(self.num_ghosts) )
 
     def createGhost(self, shapetype, size, name=None):        
         ghost = self.getGhost(name)
@@ -193,7 +189,7 @@ class PhysicsManager(object):
         model.setHpr(hpr) 
         return maxLimit - minLimit
 
-    def setShape(self, model, body):
+    def setShape(self, model, body):        
         #To Re-Do
         name = model.getName()
 
@@ -213,9 +209,17 @@ class PhysicsManager(object):
 
         [self.setShape(child,body) for child in children]
 
-    def destroy(self):
+    def cleanup(self):
         rbs = self.world.getRigidBodies()
         for body in rbs:
             self.world.removeRigidBody(body)
-            print 'Removing rigidbody'
-        #del self.world
+            print 'PhysicsManager: removing rigidbody'
+
+    def destroy(self):
+        self.cleanup()
+        del self.addShape
+        del self.world
+        print 'destroy PhysicsManager'
+
+    def __del__(self):
+        print 'delete PhysicsManager'

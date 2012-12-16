@@ -40,11 +40,19 @@ class CamerasManager(object):
 		self.currCam.node().setActive(0)
 		self.currCam = cam
 
-	def destroy(self):		
+	def cleanup(self):		
 		for cam in self.__camerasDict:
 			if cam != 'default':
-				print 'removing cam', cam
-				self.__camerasDict[cam].remove()
-		base.cam.node().setActive(1)
+				print 'camera manager: removing cam', cam
+				self.__camerasDict[cam].remove()		
+		base.cam.node().setActive(1)		
 		self.__camerasDict = {}
 		self.__camerasDict['default'] = base.cam
+		self.currCam = base.cam
+
+	def destroy(self):
+		self.cleanup()
+		print 'destroy CamerasManager'
+
+	def __del__(self):
+		print 'delete CamerasManager'

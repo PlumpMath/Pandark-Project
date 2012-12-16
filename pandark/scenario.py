@@ -1,16 +1,7 @@
-#from direct.stdpy.file import open as openFile
-#from direct.stdpy import thread
-#from panda3d.core import NodePath, Point3
 from pandark.managers.physicsmanager import PhysicsManager
 from pandark.managers.lightsmanager import LightsManager
 from pandark.managers.camerasmanager import CamerasManager
 from pandark.managers.animationsmanager import AnimationsManager
-
-import __builtin__
-__builtin__.physicsMgr = PhysicsManager()
-__builtin__.lightsMgr = LightsManager()
-
-__builtin__.animsMgr = AnimationsManager()
 
 import yaml
 
@@ -22,11 +13,7 @@ class Scenario(object):
 
 	def __init__(self,environment,nodes,lights,cameras,entities,animations,staticGeoms,yamlList):
 
-		__builtin__.camerasMgr = CamerasManager()
-
 		self.sceneNode = render.attachNewNode('sceneNode')
-
-		self.reset()
 
 		self.environment = environment
 		self.nodes       = nodes
@@ -37,20 +24,12 @@ class Scenario(object):
 		self.staticGeoms = staticGeoms
 		self.yamlList    = yamlList
 
-		self.initManagers()
+		self.physicsMgr = PhysicsManager()
+		self.lightsMgr  = LightsManager()
+		self.camerasMgr = CamerasManager()
+		self.animsMgr   = AnimationsManager()
 
-	def initManagers(self):
-		#from pandark.managers.physicsmanager import PhysicsManager
-		self.physicsMgr = physicsMgr#PhysicsManager()
-
-		#from pandark.managers.lightsmanager import LightsManager
-		self.lightsMgr = lightsMgr#LightsManager()
-
-		#from pandark.managers.camerasmanager import CamerasManager
-		self.camerasMgr = camerasMgr#CamerasManager()
-
-		#from pandark.managers.animationsmanager import AnimationsManager
-		self.animsMgr = animsMgr#AnimationsManager()
+		self.reset()
 
 	def begin(self):
 		base.setBackgroundColor( self.environment['colourBackground'] )
@@ -77,31 +56,15 @@ class Scenario(object):
 		[self.createEntity(props) for props in self.entities]
 		# [self.createStaticGeoms(props) for props in self.staticGeoms]
 
-
+		self.sceneNode.clearModelNodes()
+		self.sceneNode.flattenStrong() 
 		self.sceneNode.setShaderAuto()
 
-
-		#self.animsMgr.play('Camera01', 'idle', True) 
-
 	def reset(self):		
-		self.__nodesDict    = {}
-		self.__lightsDict   = {}
-		self.__camerasDict  = {}
 		self.__entitiesDict = {}
 
-		self.environment = None
-		self.nodes       = None
-		self.lights      = None
-		self.cameras     = None         
-		self.entities    = None       
-		self.animations  = None
-		self.staticGeoms = None
-		self.yamlList    = None
-
-		self.__nodesDict[''] = self
-
 	def getEnt(self,name):		
-		return self.__entitiesDict[name]
+		pass
 
 	def createNode(self,props):
 		parent = self.find('**/'+props['groupName']) or self.sceneNode
@@ -127,12 +90,9 @@ class Scenario(object):
 
 	def createCamera(self,props):
 		cam = self.camerasMgr.createCamera(props)
-		#self.camerasMgr.active( props['name'] )
 		self.animsMgr.createAnimation(cam, self.animations[ props['name'] ] )
 
 	def createEntity(self,props):
-		#props['parent'] = self.__nodesDict[props['groupName']]
-
 		name =  props['name']
 
 		ent = yaml.load( self.yamlList[name] )
@@ -153,36 +113,22 @@ class Scenario(object):
 
 		self.animsMgr.createAnimation(ent.getNode(), self.animations[name])
 
-	def createStaticGeoms(self,props):
-		path = props['configFile']
+	def __del__(self):
+		base.setBackgroundColor(0,0,0,1)
+		
 
-		stream = file('assets/classes/' + path + '.class', 'r')
-
-		ent = yaml.load( stream )
-
-		ent.init(props)
-
-	def destroy(self):
+		self.lightsMgr.destroy()
+		self.camerasMgr.destroy()
+		self.physicsMgr.destroy()
+		self.animsMgr.destroy()
 
 		self.sceneNode.setShaderOff()
 
-		self.reset()
-
-		self.camerasMgr.destroy()
-
-		self.animsMgr.destroy()
-
-		self.lightsMgr.destroy()
-
-		self.physicsMgr.destroy()		
-
-		self.sceneNode.clearLight()
-
-		self.sceneNode.clearFog()
-
-		self.sceneNode.removeNode()
+		for i in self.sceneNode.getChildren():
+			#self.sceneNode.clearLight(i)
+			print i, '*removed*'
+			i.remove()
 
 		self.sceneNode.remove()
 
-	def __del__(self):
-		print 'de'
+		print 'delete Scene'

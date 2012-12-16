@@ -8,10 +8,7 @@ class AnimationsManager(object):
 	def reset(self):
 		self.__animationsDict = {}
 		self.__sequences  = {}
-		self.__animations = []
-
 		self.play = True
-
 
 	def getAnimation(self,name):
 		return self.__sequences[name]
@@ -36,12 +33,6 @@ class AnimationsManager(object):
 		else:
 			self.__sequences[entName][aniName].start()
 
-	def destroy(self):
-		ivals=ivalMgr.getIntervalsMatching('*')
-		for i in ivals: 
-			i.finish()
-		self.reset()
-
 	def togglePlay(self):
 		self.play = not self.play
 		if self.play:
@@ -56,4 +47,17 @@ class AnimationsManager(object):
 			for i in ivals: 
 				self.ivals.append(i)
 				i.pause()
+
+	def cleanup(self):
+		ivals=ivalMgr.getIntervalsMatching('*')
+		for i in ivals: 
+			i.finish()
+		self.reset()
+
+	def destroy(self):
+		self.cleanup()
+		print 'destroy AnimationsManager'
+
+	def __del__(self):
+		print 'delete AnimationsManager'
 
